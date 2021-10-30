@@ -91,6 +91,13 @@ class Builder
     protected $view = 'admin::form';
 
     /**
+     * All variables in form view.
+     *
+     * @var array
+     */
+    protected $variables = [];
+
+    /**
      * Form title.
      *
      * @var string
@@ -312,6 +319,20 @@ class Builder
     public function setView($view): self
     {
         $this->view = $view;
+
+        return $this;
+    }
+
+    /**
+     * Add variables to form view.
+     *
+     * @param array $variables
+     *
+     * @return $this
+     */
+    public function with($variables = [])
+    {
+        $this->variables = $variables;
 
         return $this;
     }
@@ -683,7 +704,7 @@ SCRIPT;
             'tabObj' => $tabObj,
             'width'  => $this->width,
             'layout' => $this->form->getLayout(),
-        ];
+        ] + $this->variables;
 
         return view($this->view, $data)->render();
     }
