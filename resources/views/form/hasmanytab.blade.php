@@ -33,7 +33,7 @@
         @endforeach
 
     </ul>
-    
+
     <div class="tab-content has-many-{{$column}}-forms">
 
         @foreach($forms as $pk => $form)
@@ -48,7 +48,7 @@
     <template class="nav-tab-tpl">
         <li class="new">
             <a href="#{{ $relationName . '_new_' . \Hitechra\Admin\Form\NestedForm::DEFAULT_KEY_NAME }}" data-toggle="tab">
-                &nbsp;New {{ \Hitechra\Admin\Form\NestedForm::DEFAULT_KEY_NAME }} <i class="fa fa-exclamation-circle text-red hide"></i>
+                &nbsp;{{ $tabHeaderLabel }} {{ \Hitechra\Admin\Form\NestedForm::DEFAULT_KEY_NAME }} <i class="fa fa-exclamation-circle text-red hide"></i>
             </a>
             <i class="close-tab fa fa-times" ></i>
         </li>

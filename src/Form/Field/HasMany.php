@@ -76,6 +76,11 @@ class HasMany extends Field
     protected $distinctFields = [];
 
     /**
+     * Tab Header Label
+     */
+    protected $tabHeaderLabel = 'New';
+
+    /**
      * Create a new HasMany field instance.
      *
      * @param $relationName
@@ -133,7 +138,7 @@ class HasMany extends Field
 
             if (is_array($column)) {
                 foreach ($column as $key => $name) {
-                    $rules[$name.$key] = $fieldRules;
+                    $rules[$name . $key] = $fieldRules;
                 }
 
                 $this->resetInputKey($input, $column);
@@ -159,8 +164,10 @@ class HasMany extends Field
         foreach ($rules as $column => $rule) {
             foreach (array_keys($input[$this->column]) as $key) {
                 $newRules["{$this->column}.$key.$column"] = $rule;
-                if (isset($input[$this->column][$key][$column]) &&
-                    is_array($input[$this->column][$key][$column])) {
+                if (
+                    isset($input[$this->column][$key][$column]) &&
+                    is_array($input[$this->column][$key][$column])
+                ) {
                     foreach ($input[$this->column][$key][$column] as $vkey => $value) {
                         $newInput["{$this->column}.$key.{$column}$vkey"] = $value;
                     }
@@ -218,7 +225,7 @@ class HasMany extends Field
 
         if (is_array($column)) {
             foreach ($column as $index => $col) {
-                $new[$col.$index] = $col;
+                $new[$col . $index] = $col;
             }
         }
 
@@ -230,7 +237,7 @@ class HasMany extends Field
             } else {
                 foreach ($new as $k => $val) {
                     if (Str::endsWith($key, ".$k")) {
-                        $attributes[$key] = $label."[$val]";
+                        $attributes[$key] = $label . "[$val]";
                     }
                 }
             }
@@ -289,7 +296,7 @@ class HasMany extends Field
                  *
                  * I don't know why a form need range input? Only can imagine is for range search....
                  */
-                $newKey = $name.$column[$name];
+                $newKey = $name . $column[$name];
 
                 /*
                  * set new key
@@ -463,7 +470,7 @@ class HasMany extends Field
      */
     protected function setupScript($script)
     {
-        $method = 'setupScriptFor'.ucfirst($this->viewMode).'View';
+        $method = 'setupScriptFor' . ucfirst($this->viewMode) . 'View';
 
         call_user_func([$this, $method], $script);
     }
@@ -643,6 +650,18 @@ EOT;
     }
 
     /**
+     * Set Tab Header Label
+     *
+     * @param string $label
+     */
+    public function tabHeaderLabel($label)
+    {
+        $this->tabHeaderLabel = $label;
+
+        return $this;
+    }
+
+    /**
      * Render the `HasMany` field.
      *
      * @throws \Exception
@@ -672,6 +691,7 @@ EOT;
             'template'     => $template,
             'relationName' => $this->relationName,
             'options'      => $this->options,
+            'tabHeaderLabel' => $this->tabHeaderLabel
         ]);
     }
 
@@ -717,7 +737,7 @@ EOT;
         }, '');
 
         /* Build cell with hidden elements */
-        $template .= '<td class="hidden">'.implode('', $hidden).'</td>';
+        $template .= '<td class="hidden">' . implode('', $hidden) . '</td>';
 
         $this->setupScript(implode("\r\n", $scripts));
 
