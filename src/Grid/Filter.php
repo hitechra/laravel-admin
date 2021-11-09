@@ -509,10 +509,13 @@ class Filter implements Renderable
     public function execute($toArray = true)
     {
         if (method_exists($this->model->eloquent(), 'paginate')) {
-            $this->model->usePaginate(true);
+            if (!$this->model->useSimplePaginate) {
+                $this->model->usePaginate(true);
+            }
 
             return $this->model->buildData($toArray);
         }
+
         $conditions = array_merge(
             $this->conditions(),
             $this->scopeConditions()
@@ -617,10 +620,10 @@ class Filter implements Renderable
         $query = $request->query();
         Arr::forget($query, $keys);
 
-        $question = $request->getBaseUrl().$request->getPathInfo() == '/' ? '/?' : '?';
+        $question = $request->getBaseUrl() . $request->getPathInfo() == '/' ? '/?' : '?';
 
         return count($request->query()) > 0
-            ? $request->url().$question.http_build_query($query)
+            ? $request->url() . $question . http_build_query($query)
             : $request->fullUrl();
     }
 
@@ -631,7 +634,7 @@ class Filter implements Renderable
     public static function extend($name, $filterClass)
     {
         if (!is_subclass_of($filterClass, AbstractFilter::class)) {
-            throw new \InvalidArgumentException("The class [$filterClass] must be a type of ".AbstractFilter::class.'.');
+            throw new \InvalidArgumentException("The class [$filterClass] must be a type of " . AbstractFilter::class . '.');
         }
 
         static::$supports[$name] = $filterClass;

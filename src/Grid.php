@@ -37,8 +37,8 @@ class Grid
         Concerns\CanDoubleClick,
         ShouldSnakeAttributes,
         Macroable {
-            __call as macroCall;
-        }
+        __call as macroCall;
+    }
 
     /**
      * The grid data model instance.
@@ -351,7 +351,7 @@ class Grid
             return $this;
         }
 
-        $name = ($this->shouldSnakeAttributes() ? Str::snake($relation) : $relation).'.'.$column;
+        $name = ($this->shouldSnakeAttributes() ? Str::snake($relation) : $relation) . '.' . $column;
 
         $this->model()->with($relation);
 
@@ -426,7 +426,7 @@ class Grid
      */
     public function paginator()
     {
-        return new Tools\Paginator($this, $this->options['show_perpage_selector']);
+        return new Tools\Paginator($this, $this->options['show_perpage_selector'], $this->model()->useSimplePaginate);
     }
 
     /**
@@ -439,6 +439,18 @@ class Grid
         $this->model->usePaginate(!$disable);
 
         return $this->option('show_pagination', !$disable);
+    }
+
+    /**
+     * Enable simple pagination
+     *
+     * return $this
+     */
+    public function useSimplePagination(bool $use = true)
+    {
+        $this->model->useSimplePaginate($use);
+
+        return $this;
     }
 
     /**
@@ -628,7 +640,7 @@ class Grid
         return sprintf(
             '%s/create%s',
             $this->resource(),
-            $queryString ? ('?'.$queryString) : ''
+            $queryString ? ('?' . $queryString) : ''
         );
     }
 
@@ -753,7 +765,8 @@ class Grid
             return false;
         }
 
-        if ($relation instanceof Relations\HasOne ||
+        if (
+            $relation instanceof Relations\HasOne ||
             $relation instanceof Relations\BelongsTo ||
             $relation instanceof Relations\MorphOne
         ) {
@@ -764,7 +777,8 @@ class Grid
             );
         }
 
-        if ($relation instanceof Relations\HasMany
+        if (
+            $relation instanceof Relations\HasMany
             || $relation instanceof Relations\BelongsToMany
             || $relation instanceof Relations\MorphToMany
             || $relation instanceof Relations\HasManyThrough

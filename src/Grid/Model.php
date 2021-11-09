@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
@@ -60,6 +61,11 @@ class Model
      * @var bool
      */
     protected $usePaginate = true;
+
+    /**
+     * If the model use simplePagination
+     */
+    public $useSimplePaginate = false;
 
     /**
      * The query string variable used to store the per-page.
@@ -138,6 +144,16 @@ class Model
     }
 
     /**
+     * Enable or disable simple pagination
+     *
+     * @param bool $use
+     */
+    public function useSimplePaginate($use = true)
+    {
+        $this->useSimplePaginate = $use;
+    }
+
+    /**
      * Get the query string variable used to store the per-page.
      *
      * @return string
@@ -181,6 +197,12 @@ class Model
     public function setPerPage($perPage)
     {
         $this->perPage = $perPage;
+
+        if ($this->useSimplePaginate) {
+            $this->__call('simplePaginate', [$perPage]);
+
+            return $this;
+        }
 
         $this->__call('paginate', [$perPage]);
 
@@ -386,6 +408,10 @@ class Model
             return $this->model;
         }
 
+        if ($this->model instanceof Paginator && $this->useSimplePaginate) {
+            return $this->model->getCollection();
+        }
+
         if ($this->model instanceof LengthAwarePaginator) {
             $this->handleInvalidPage($this->model);
 
@@ -455,7 +481,7 @@ class Model
             ];
         } else {
             $query = [
-                'method'    => 'paginate',
+                'method'    => $this->useSimplePaginate ? 'simplePaginate' : 'paginate',
                 'arguments' => $this->resolvePerPage($paginate),
             ];
         }
@@ -578,7 +604,7 @@ class Model
 
             $this->queries->push([
                 'method'    => 'select',
-                'arguments' => [$this->model->getTable().'.*'],
+                'arguments' => [$this->model->getTable() . '.*'],
             ]);
 
             $this->queries->push([
@@ -591,7 +617,7 @@ class Model
             $this->queries->push([
                 'method'    => 'orderBy',
                 'arguments' => [
-                    $relation->getRelated()->getTable().'.'.$relationColumn,
+                    $relation->getRelated()->getTable() . '.' . $relationColumn,
                     $this->sort['type'],
                 ],
             ]);
@@ -632,7 +658,7 @@ class Model
                 $relatedTable,
                 $relation->{$foreignKeyMethod}(),
                 '=',
-                $relatedTable.'.'.$relation->getRelated()->getKeyName(),
+                $relatedTable . '.' . $relation->getRelated()->getKeyName(),
             ];
         }
 

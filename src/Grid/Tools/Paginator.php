@@ -4,6 +4,7 @@ namespace Hitechra\Admin\Grid\Tools;
 
 use Hitechra\Admin\Grid;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator as PaginationPaginator;
 
 class Paginator extends AbstractTool
 {
@@ -18,14 +19,20 @@ class Paginator extends AbstractTool
     protected $perPageSelector = true;
 
     /**
+     * @var bool
+     */
+    protected $useSimple = true;
+
+    /**
      * Create a new Paginator instance.
      *
      * @param Grid $grid
      */
-    public function __construct(Grid $grid, $perPageSelector = true)
+    public function __construct(Grid $grid, $perPageSelector = true, $useSimple = false)
     {
         $this->grid = $grid;
         $this->perPageSelector = $perPageSelector;
+        $this->useSimple = $useSimple;
 
         $this->initPaginator();
     }
@@ -39,7 +46,7 @@ class Paginator extends AbstractTool
     {
         $this->paginator = $this->grid->model()->eloquent();
 
-        if ($this->paginator instanceof LengthAwarePaginator) {
+        if ($this->paginator instanceof LengthAwarePaginator || $this->paginator instanceof PaginationPaginator) {
             $this->paginator->appends(request()->all());
         }
     }
@@ -51,6 +58,10 @@ class Paginator extends AbstractTool
      */
     protected function paginationLinks()
     {
+        if ($this->useSimple) {
+            return $this->paginator->render('admin::simplePagination');
+        }
+
         return $this->paginator->render('admin::pagination');
     }
 
@@ -77,9 +88,12 @@ class Paginator extends AbstractTool
     {
         $parameters = [
             'first' => $this->paginator->firstItem(),
-            'last'  => $this->paginator->lastItem(),
-            'total' => $this->paginator->total(),
+            'last'  => $this->paginator->lastItem()
         ];
+
+        if (!$this->useSimple) {
+            $parameters['total'] = $this->paginator->total();
+        }
 
         $parameters = collect($parameters)->flatMap(function ($parameter, $key) {
             return [$key => "<b>$parameter</b>"];
@@ -99,8 +113,8 @@ class Paginator extends AbstractTool
             return '';
         }
 
-        return $this->paginationRanger().
-            $this->paginationLinks().
+        return $this->paginationRanger() .
+            $this->paginationLinks() .
             $this->perPageSelector();
     }
 }
