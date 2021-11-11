@@ -131,6 +131,21 @@ class Footer implements Renderable
     }
 
     /**
+     * Diable creating, editing, reset and view checkbox.
+     *
+     * @return $this
+     */
+    public function clean()
+    {
+        $this->disableCreatingCheck();
+        $this->disableEditingCheck();
+        $this->disableReset();
+        $this->disableViewCheck();
+
+        return $this;
+    }
+
+    /**
      * Set `view` as default check.
      *
      * @return $this
@@ -172,7 +187,7 @@ class Footer implements Renderable
     protected function setupScript()
     {
         $script = <<<'EOT'
-        
+
 $('.after-submit').iCheck({checkboxClass:'icheckbox_minimal-blue'}).on('ifChecked', function () {
     $('.after-submit').not(this).iCheck('uncheck');
 });
