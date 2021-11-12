@@ -113,6 +113,10 @@ class Paginator extends AbstractTool
             return '';
         }
 
+        if ($this->useSimple) {
+            return $this->paginationLinks() . $this->perPageSelector();
+        }
+
         return $this->paginationRanger() .
             $this->paginationLinks() .
             $this->perPageSelector();
