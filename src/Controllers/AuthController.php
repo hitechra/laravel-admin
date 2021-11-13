@@ -132,11 +132,11 @@ class AuthController extends Controller
         $form->display('username', trans('admin.username'));
         $form->text('name', trans('admin.name'))->rules('required');
         $form->image('avatar', trans('admin.avatar'));
-        $form->password('password', trans('admin.password'))->rules('confirmed|required');
-        $form->password('password_confirmation', trans('admin.password_confirmation'))->rules('required')
-            ->default(function ($form) {
-                return $form->model()->password;
-            });
+
+        $form->password('password', trans('admin.password'))
+            ->help(__('Leave it empty, if you don\'t want to change the password'))
+            ->rules('confirmed|nullable');
+        $form->password('password_confirmation', trans('admin.password_confirmation'))->rules('nullable');
 
         $form->setAction(admin_url('auth/setting'));
 

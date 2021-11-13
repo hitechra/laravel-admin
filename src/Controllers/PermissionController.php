@@ -3,6 +3,7 @@
 namespace Hitechra\Admin\Controllers;
 
 use Hitechra\Admin\Form;
+use Hitechra\Admin\Form\Footer;
 use Hitechra\Admin\Grid;
 use Hitechra\Admin\Show;
 use Illuminate\Support\Str;
@@ -48,15 +49,18 @@ class PermissionController extends AdminController
                 })->implode('&nbsp;');
 
                 if (!empty(config('admin.route.prefix'))) {
-                    $path = '/'.trim(config('admin.route.prefix'), '/').$path;
+                    $path = '/' . trim(config('admin.route.prefix'), '/') . $path;
                 }
 
                 return "<div style='margin-bottom: 5px;'>$method<code>$path</code></div>";
             })->implode('');
         });
 
-        $grid->column('created_at', trans('admin.created_at'));
-        $grid->column('updated_at', trans('admin.updated_at'));
+        $grid->disableBatchActions();
+        $grid->disableExport();
+        $grid->disableRowSelector();
+        $grid->disableFilter();
+        $grid->quickSearch('name', 'slug');
 
         $grid->tools(function (Grid\Tools $tools) {
             $tools->batch(function (Grid\Tools\BatchActions $actions) {
@@ -100,15 +104,12 @@ class PermissionController extends AdminController
                 })->implode('&nbsp;');
 
                 if (!empty(config('admin.route.prefix'))) {
-                    $path = '/'.trim(config('admin.route.prefix'), '/').$path;
+                    $path = '/' . trim(config('admin.route.prefix'), '/') . $path;
                 }
 
                 return "<div style='margin-bottom: 5px;'>$method<code>$path</code></div>";
             })->implode('');
         });
-
-        $show->field('created_at', trans('admin.created_at'));
-        $show->field('updated_at', trans('admin.updated_at'));
 
         return $show;
     }
@@ -134,8 +135,9 @@ class PermissionController extends AdminController
             ->help(trans('admin.all_methods_if_empty'));
         $form->textarea('http_path', trans('admin.http.path'));
 
-        $form->display('created_at', trans('admin.created_at'));
-        $form->display('updated_at', trans('admin.updated_at'));
+        $form->footer(function (Footer $footer) {
+            $footer->clean();
+        });
 
         return $form;
     }

@@ -3,6 +3,7 @@
 namespace Hitechra\Admin\Controllers;
 
 use Hitechra\Admin\Form;
+use Hitechra\Admin\Form\Footer;
 use Hitechra\Admin\Grid;
 use Hitechra\Admin\Show;
 
@@ -32,9 +33,6 @@ class RoleController extends AdminController
         $grid->column('name', trans('admin.name'));
 
         $grid->column('permissions', trans('admin.permission'))->pluck('name')->label();
-
-        $grid->column('created_at', trans('admin.created_at'));
-        $grid->column('updated_at', trans('admin.updated_at'));
 
         $grid->actions(function (Grid\Displayers\Actions $actions) {
             if ($actions->row->slug == 'administrator') {
@@ -70,8 +68,6 @@ class RoleController extends AdminController
         $show->field('permissions', trans('admin.permissions'))->as(function ($permission) {
             return $permission->pluck('name');
         })->label();
-        $show->field('created_at', trans('admin.created_at'));
-        $show->field('updated_at', trans('admin.updated_at'));
 
         return $show;
     }
@@ -94,8 +90,9 @@ class RoleController extends AdminController
         $form->text('name', trans('admin.name'))->rules('required');
         $form->listbox('permissions', trans('admin.permissions'))->options($permissionModel::all()->pluck('name', 'id'));
 
-        $form->display('created_at', trans('admin.created_at'));
-        $form->display('updated_at', trans('admin.updated_at'));
+        $form->footer(function (Footer $footer) {
+            $footer->clean();
+        });
 
         return $form;
     }
