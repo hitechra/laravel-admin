@@ -99,6 +99,10 @@ class UserController extends AdminController
             ->creationRules(['required', "unique:{$connection}.{$userTable}"])
             ->updateRules(['required', "unique:{$connection}.{$userTable},username,{{id}}"]);
 
+        $form->text('email', trans('Email'))
+            ->creationRules(['required', "unique:{$connection}.{$userTable}"])
+            ->updateRules(['required', "unique:{$connection}.{$userTable},email,{{id}}"]);
+
         $form->text('name', trans('admin.name'))->rules('required');
         $form->image('avatar', trans('admin.avatar'));
 

@@ -129,7 +129,15 @@ class AuthController extends Controller
 
         $form = new Form(new $class());
 
+        $userTable = config('admin.database.users_table');
+        $connection = config('admin.database.connection');
+
         $form->display('username', trans('admin.username'));
+
+        $form->text('email', trans('Email'))
+            ->creationRules(['required', "unique:{$connection}.{$userTable}"])
+            ->updateRules(['required', "unique:{$connection}.{$userTable},email,{{id}}"]);
+
         $form->text('name', trans('admin.name'))->rules('required');
         $form->image('avatar', trans('admin.avatar'));
 
