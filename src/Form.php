@@ -1234,6 +1234,17 @@ class Form implements Renderable
     }
 
     /**
+     * @param Model $model
+     * @return $this
+     */
+    public function setModel($model)
+    {
+        $this->model = $model;
+
+        return $this;
+    }
+
+    /**
      * Set field and label width in current form.
      *
      * @param int $fieldWidth
