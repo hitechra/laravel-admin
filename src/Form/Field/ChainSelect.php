@@ -6,7 +6,7 @@ use Hitechra\Admin\Facades\Admin;
 use Hitechra\Admin\Form\Field\Select as FieldSelect;
 use Illuminate\Support\Str;
 
-class Select extends FieldSelect
+class ChainSelect extends FieldSelect
 {
     /**
      * Load options for other select on change.
