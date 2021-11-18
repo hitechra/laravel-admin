@@ -188,8 +188,7 @@ class Form implements Renderable
      */
     public function edit($id): self
     {
-        $this->setModeEdit();
-        $this->builder->setResourceId($id);
+        $this->setModeEdit($id);
 
         $this->setRelationFieldSnakeAttributes();
 
@@ -201,9 +200,10 @@ class Form implements Renderable
     /**
      * @return $this
      */
-    public function setModeEdit(): self
+    public function setModeEdit($id): self
     {
         $this->builder->setMode(Builder::MODE_EDIT);
+        $this->builder->setResourceId($id);
 
         return $this;
     }
