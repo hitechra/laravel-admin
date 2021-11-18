@@ -1466,6 +1466,18 @@ class Form implements Renderable
     }
 
     /**
+     * @return $this
+     *
+     * @deprecated
+     */
+    public function cleanFooter(): self
+    {
+        $this->builder()->getFooter()->clean();
+
+        return $this;
+    }
+
+    /**
      * Footer setting for form.
      *
      * @param Closure $callback
