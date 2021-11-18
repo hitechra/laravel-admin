@@ -14,6 +14,7 @@ use Illuminate\Support\Arr;
  * @method Field\RadioButton    radioButton($column, $label = '')
  * @method Field\RadioCard      radioCard($column, $label = '')
  * @method Field\Select         select($column, $label = '')
+ * @method Field\ChainSelect    chainSelect($column, $label = '')
  * @method Field\MultipleSelect multipleSelect($column, $label = '')
  * @method Field\Textarea       textarea($column, $label = '')
  * @method Field\Hidden         hidden($column, $label = '')
