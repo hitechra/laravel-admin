@@ -26,6 +26,7 @@ use Illuminate\Validation\Validator;
  * @method Field\RadioButton    radioButton($name, $label = '')
  * @method Field\RadioCard      radioCard($name, $label = '')
  * @method Field\Select         select($name, $label = '')
+ * @method Field\ChainSelect    chainSelect($name, $label = '')
  * @method Field\MultipleSelect multipleSelect($name, $label = '')
  * @method Field\Textarea       textarea($name, $label = '')
  * @method Field\Hidden         hidden($name, $label = '')
@@ -217,7 +218,7 @@ class Form implements Renderable
     protected function initFormAttributes()
     {
         $this->attributes = [
-            'id'             => 'widget-form-'.uniqid(),
+            'id'             => 'widget-form-' . uniqid(),
             'method'         => 'POST',
             'action'         => '',
             'class'          => 'form-horizontal',
