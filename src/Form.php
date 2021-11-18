@@ -1073,6 +1073,35 @@ class Form implements Renderable
     }
 
     /**
+     * Generate a edit model data.
+     *
+     * @param $id
+     *
+     * @return $this
+     */
+    public function editing($id): self
+    {
+        $this->builder->setMode(Builder::MODE_EDIT);
+        $this->builder->setResourceId($id);
+
+        $this->setRelationFieldSnakeAttributes();
+
+        $relations = $this->getRelations();
+
+        $builder = $this->model();
+
+        if ($this->isSoftDeletes) {
+            $builder = $builder->withTrashed();
+        }
+
+        $this->model = $builder->with($relations)->findOrFail($id);
+
+        $this->callEditing();
+
+        return $this;
+    }
+
+    /**
      * Set all fields value in form.
      *
      * @param $id
