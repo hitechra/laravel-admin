@@ -187,6 +187,21 @@ class Form extends Interactor
      * @param string $column
      * @param string $label
      *
+     * @return Field\Select
+     */
+    public function chainSelect($column, $label = '')
+    {
+        $field = new Field\ChainSelect($column, $this->formatLabel($label));
+
+        $this->addField($field);
+
+        return $field;
+    }
+
+    /**
+     * @param string $column
+     * @param string $label
+     *
      * @return Field\MultipleSelect
      */
     public function multipleSelect($column, $label = '')
@@ -498,7 +513,7 @@ class Form extends Interactor
     {
         if (!$this->modalId) {
             if ($this->action instanceof RowAction) {
-                $this->modalId = uniqid('row-action-modal-').mt_rand(1000, 9999);
+                $this->modalId = uniqid('row-action-modal-') . mt_rand(1000, 9999);
             } else {
                 $this->modalId = strtolower(str_replace('\\', '-', get_class($this->action)));
             }
