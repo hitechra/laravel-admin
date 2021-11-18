@@ -1245,6 +1245,20 @@ class Form implements Renderable
     }
 
     /**
+     * @param Model $model
+     * @return $this
+     */
+    public function setModelAndFillFields($model)
+    {
+        $this->setModel($model);
+
+        $this->fillFields($this->model()->toArray());
+
+        return $this;
+    }
+
+
+    /**
      * Set field and label width in current form.
      *
      * @param int $fieldWidth
