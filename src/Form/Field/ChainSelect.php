@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 
 class ChainSelect extends FieldSelect
 {
+    protected $view = 'admin::form.select';
+
     /**
      * Load options for other select on change.
      *
