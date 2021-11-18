@@ -57,24 +57,26 @@ $(document).on('change', "{$this->getElementClassSelector()}", function () {
         $(target).trigger('change');
     });
 });
-var el = $("{$this->getElementClassSelector()}");
-var target = el.closest('.fields-group').find(".$class");
-$.get("$sourceUrl",{q : el.val()}, function (data) {
-    target.find("option").remove();
-    $(target).select2({
-        placeholder: $placeholder,
-        allowClear: $strAllowClear,
-        data: $.map(data, function (d) {
-            d.id = d.$idField;
-            d.text = d.$textField;
-            return d;
-        })
+(function() {
+    const el = $("{$this->getElementClassSelector()}");
+    const target = el.closest('.fields-group').find(".$class");
+    $.get("$sourceUrl",{q : el.val()}, function (data) {
+        target.find("option").remove();
+        $(target).select2({
+            placeholder: $placeholder,
+            allowClear: $strAllowClear,
+            data: $.map(data, function (d) {
+                d.id = d.$idField;
+                d.text = d.$textField;
+                return d;
+            })
+        });
+        if (target.data('value')) {
+            $(target).val(target.data('value'));
+        }
+        $(target).trigger('change');
     });
-    if (target.data('value')) {
-        $(target).val(target.data('value'));
-    }
-    $(target).trigger('change');
-});
+})();
 EOT;
 
         Admin::script($script);
