@@ -100,6 +100,7 @@ trait HasFields
         'radioCard'         => Field\RadioCard::class,
         'rate'              => Field\Rate::class,
         'select'            => Field\Select::class,
+        'chainSelect'       => Field\ChainSelect::class,
         'slider'            => Field\Slider::class,
         'switch'            => Field\SwitchField::class,
         'text'              => Field\Text::class,
