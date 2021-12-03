@@ -34,7 +34,7 @@ class Delete extends RowAction
                 $model->delete();
             });
         } catch (\Exception $exception) {
-            return $this->response()->error("{$trans['failed']} : {$exception->getMessage()}");
+            return $this->response()->error("{$trans['failed']}");
         }
 
         return $this->response()->success($trans['succeeded'])->refresh();
