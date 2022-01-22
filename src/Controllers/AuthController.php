@@ -66,8 +66,8 @@ class AuthController extends Controller
     protected function loginValidator(array $data)
     {
         return Validator::make($data, [
-            $this->username()   => 'required',
-            'password'          => 'required',
+            $this->username() => 'required',
+            'password' => 'required',
         ]);
     }
 
@@ -161,6 +161,8 @@ class AuthController extends Controller
 
             return redirect(admin_url('auth/setting'));
         });
+
+        $form->cleanFooter();
 
         return $form;
     }

@@ -4,9 +4,17 @@
     <!-- Logo -->
     <a href="{{ admin_url('/') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini">{!! config('admin.logo-mini', config('admin.name')) !!}</span>
+        <span class="logo-mini">
+            <strong>
+                {!! config('admin.logo-mini', config('admin.name')) !!}
+            </strong>
+        </span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg">{!! config('admin.logo', config('admin.name')) !!}</span>
+        <span class="logo-lg">
+            <strong>
+                {!! config('admin.logo', config('admin.name')) !!}
+            </strong>
+        </span>
     </a>
 
     <!-- Header Navbar -->
@@ -16,16 +24,16 @@
             <span class="sr-only">Toggle navigation</span>
         </a>
         <ul class="nav navbar-nav hidden-sm visible-lg-block">
-        {!! Admin::getNavbar()->render('left') !!}
+            {!! Admin::getNavbar()->render('left') !!}
         </ul>
 
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
 
-                {!! Admin::getNavbar()->render() !!}
+            {!! Admin::getNavbar()->render() !!}
 
-                <!-- User Account Menu -->
+            <!-- User Account Menu -->
                 <li class="dropdown user user-menu">
                     <!-- Menu Toggle Button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -46,17 +54,19 @@
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{ admin_url('auth/setting') }}" class="btn btn-default btn-flat">{{ trans('admin.setting') }}</a>
+                                <a href="{{ admin_url('auth/setting') }}" class="btn btn-default btn-flat">{{
+                                    trans('admin.setting') }}</a>
                             </div>
                             <div class="pull-right">
-                                <a href="{{ admin_url('auth/logout') }}" class="btn btn-danger btn-flat">{{ trans('admin.logout') }}</a>
+                                <a href="{{ admin_url('auth/logout') }}" class="btn btn-danger btn-flat">{{
+                                    trans('admin.logout') }}</a>
                             </div>
                         </li>
                     </ul>
                 </li>
                 <!-- Control Sidebar Toggle Button -->
                 {{--<li>--}}
-                    {{--<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>--}}
+                {{--<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>--}}
                 {{--</li>--}}
             </ul>
         </div>

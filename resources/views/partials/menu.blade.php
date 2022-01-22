@@ -1,10 +1,16 @@
+@php
+    $disable_pjax = [
+        '/'
+    ]
+@endphp
+
 @if(Admin::user()->visible(\Illuminate\Support\Arr::get($item, 'roles', [])) && Admin::user()->can(\Illuminate\Support\Arr::get($item, 'permission')))
     @if(!isset($item['children']))
         <li>
             @if(url()->isValidUrl($item['uri']))
                 <a href="{{ $item['uri'] }}" target="_blank">
             @else
-                 <a href="{{ admin_url($item['uri']) }}">
+                <a href="{{ admin_url($item['uri']) }}" class="{{ in_array($item['uri'], $disable_pjax) ? 'disable-pjax' : '' }}">
             @endif
                 <i class="fa {{$item['icon']}}"></i>
                 @if (Lang::has($titleTranslation = 'admin.menu_titles.' . trim(str_replace(' ', '_', strtolower($item['title'])))))

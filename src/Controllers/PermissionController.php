@@ -35,10 +35,10 @@ class PermissionController extends AdminController
 
         $grid->column('http_path', trans('admin.route'))->display(function ($path) {
             return collect(explode("\n", $path))->map(function ($path) {
-                $method = $this->http_method ?: ['ANY'];
+                $method = $this->http_method ?: [ 'ANY' ];
 
                 if (Str::contains($path, ':')) {
-                    list($method, $path) = explode(':', $path);
+                    [ $method, $path ] = explode(':', $path);
                     $method = explode(',', $method);
                 }
 
@@ -90,10 +90,10 @@ class PermissionController extends AdminController
 
         $show->field('http_path', trans('admin.route'))->unescape()->as(function ($path) {
             return collect(explode("\r\n", $path))->map(function ($path) {
-                $method = $this->http_method ?: ['ANY'];
+                $method = $this->http_method ?: [ 'ANY' ];
 
                 if (Str::contains($path, ':')) {
-                    list($method, $path) = explode(':', $path);
+                    [ $method, $path ] = explode(':', $path);
                     $method = explode(',', $method);
                 }
 
@@ -130,14 +130,14 @@ class PermissionController extends AdminController
         $form->text('slug', trans('admin.slug'))->rules('required');
         $form->text('name', trans('admin.name'))->rules('required');
 
-        $form->multipleSelect('http_method', trans('admin.http.method'))
-            ->options($this->getHttpMethodsOptions())
-            ->help(trans('admin.all_methods_if_empty'));
+        $form->multipleSelect('http_method', trans('admin.http.method'))->options($this->getHttpMethodsOptions())->help(trans('admin.all_methods_if_empty'));
         $form->textarea('http_path', trans('admin.http.path'));
 
         $form->footer(function (Footer $footer) {
             $footer->clean();
         });
+
+        $form->cleanFooter();
 
         return $form;
     }

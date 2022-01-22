@@ -2,14 +2,13 @@
 
 namespace Hitechra\Admin\Auth\Database;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
 
 trait HasPermissions
 {
     /**
      * Get all permissions of user.
-     *
-     * @return mixed
      */
     public function allPermissions(): Collection
     {
@@ -18,13 +17,8 @@ trait HasPermissions
 
     /**
      * Check if user has permission.
-     *
-     * @param $ability
-     * @param array $arguments
-     *
-     * @return bool
      */
-    public function can($ability, $arguments = []): bool
+    public function can($ability, array $arguments = []): bool
     {
         if (empty($ability)) {
             return true;
@@ -117,5 +111,33 @@ trait HasPermissions
 
             $model->permissions()->detach();
         });
+    }
+
+    /**
+     * A user has and belongs to many roles.
+     *
+     * @return BelongsToMany
+     */
+    public function roles(): BelongsToMany
+    {
+        $pivotTable = config('admin.database.role_users_table');
+
+        $relatedModel = config('admin.database.roles_model');
+
+        return $this->belongsToMany($relatedModel, $pivotTable, 'user_id', 'role_id');
+    }
+
+    /**
+     * A User has and belongs to many permissions.
+     *
+     * @return BelongsToMany
+     */
+    public function permissions(): BelongsToMany
+    {
+        $pivotTable = config('admin.database.user_permissions_table');
+
+        $relatedModel = config('admin.database.permissions_model');
+
+        return $this->belongsToMany($relatedModel, $pivotTable, 'user_id', 'permission_id');
     }
 }

@@ -35,6 +35,7 @@ class Form implements Renderable
     use HasFields;
     use HandleCascadeFields;
     use ShouldSnakeAttributes;
+
     /**
      * Remove flag in `has many` form.
      */
@@ -286,15 +287,9 @@ class Form implements Renderable
                 return $ret;
             }
 
-            $response = [
-                'status'  => true,
-                'message' => trans('admin.delete_succeeded'),
-            ];
+            $response = [ 'status' => true, 'message' => trans('admin.delete_succeeded'), ];
         } catch (\Exception $exception) {
-            $response = [
-                'status'  => false,
-                'message' => $exception->getMessage() ?: trans('admin.delete_failed'),
-            ];
+            $response = [ 'status' => false, 'message' => $exception->getMessage() ?: trans('admin.delete_failed'), ];
         }
 
         return response()->json($response);
@@ -373,11 +368,7 @@ class Form implements Renderable
     protected function responseValidationError(MessageBag $message)
     {
         if (\request()->ajax() && !\request()->pjax()) {
-            return response()->json([
-                'status'     => false,
-                'validation' => $message,
-                'message'    => $message->first(),
-            ]);
+            return response()->json([ 'status' => false, 'validation' => $message, 'message' => $message->first(), ]);
         }
 
         return back()->withInput()->withErrors($message);
@@ -396,11 +387,7 @@ class Form implements Renderable
 
         // ajax but not pjax
         if ($request->ajax() && !$request->pjax()) {
-            return response()->json([
-                'status'  => true,
-                'message' => $message,
-                'display' => $this->applayFieldDisplay(),
-            ]);
+            return response()->json([ 'status' => true, 'message' => $message, 'display' => $this->applayFieldDisplay(), ]);
         }
 
         return false;
@@ -489,11 +476,8 @@ class Form implements Renderable
         $relations = [];
 
         foreach ($inputs as $column => $value) {
-            if ((method_exists($this->model, $column) ||
-                    method_exists($this->model, $column = Str::camel($column))) &&
-                !method_exists(Model::class, $column)
-            ) {
-                $relation = call_user_func([$this->model, $column]);
+            if ((method_exists($this->model, $column) || method_exists($this->model, $column = Str::camel($column))) && !method_exists(Model::class, $column)) {
+                $relation = call_user_func([ $this->model, $column ]);
 
                 if ($relation instanceof Relations\Relation) {
                     $relations[$column] = $value;
@@ -539,7 +523,7 @@ class Form implements Renderable
                 return back()->withInput()->withErrors($validationMessages);
             }
 
-            return response()->json(['errors' => Arr::dot($validationMessages->getMessages())], 422);
+            return response()->json([ 'errors' => Arr::dot($validationMessages->getMessages()) ], 422);
         }
 
         if (($response = $this->prepare($data)) instanceof Response) {
@@ -655,10 +639,7 @@ class Form implements Renderable
         $data = $this->handleFileSort($data);
 
         if ($this->handleOrderable($id, $data)) {
-            return response([
-                'status'  => true,
-                'message' => trans('admin.update_succeeded'),
-            ]);
+            return response([ 'status' => true, 'message' => trans('admin.update_succeeded'), ]);
         }
 
         return $data;
@@ -677,7 +658,7 @@ class Form implements Renderable
             $name = $input['name'];
             $value = $input['value'];
 
-            Arr::forget($input, ['pk', 'value', 'name']);
+            Arr::forget($input, [ 'pk', 'value', 'name' ]);
             Arr::set($input, $name, $value);
         }
 
@@ -766,11 +747,9 @@ class Form implements Renderable
 
             $relation = $this->model->$name();
 
-            $oneToOneRelation = $relation instanceof Relations\HasOne
-                || $relation instanceof Relations\MorphOne
-                || $relation instanceof Relations\BelongsTo;
+            $oneToOneRelation = $relation instanceof Relations\HasOne || $relation instanceof Relations\MorphOne || $relation instanceof Relations\BelongsTo;
 
-            $prepared = $this->prepareUpdate([$name => $values], $oneToOneRelation);
+            $prepared = $this->prepareUpdate([ $name => $values ], $oneToOneRelation);
 
             if (empty($prepared)) {
                 continue;
@@ -889,10 +868,8 @@ class Form implements Renderable
      */
     protected function isInvalidColumn($columns, $containsDot = false): bool
     {
-        foreach ((array) $columns as $column) {
-            if ((!$containsDot && Str::contains($column, '.')) ||
-                ($containsDot && !Str::contains($column, '.'))
-            ) {
+        foreach ((array)$columns as $column) {
+            if ((!$containsDot && Str::contains($column, '.')) || ($containsDot && !Str::contains($column, '.'))) {
                 return true;
             }
         }
@@ -963,7 +940,7 @@ class Form implements Renderable
      */
     public function ignore($fields): self
     {
-        $this->ignored = array_merge($this->ignored, (array) $fields);
+        $this->ignored = array_merge($this->ignored, (array)$fields);
 
         return $this;
     }
@@ -1002,15 +979,13 @@ class Form implements Renderable
      */
     protected function getFieldByColumn($column)
     {
-        return $this->fields()->first(
-            function (Field $field) use ($column) {
-                if (is_array($field->column())) {
-                    return in_array($column, $field->column());
-                }
-
-                return $field->column() == $column;
+        return $this->fields()->first(function (Field $field) use ($column) {
+            if (is_array($field->column())) {
+                return in_array($column, $field->column());
             }
-        );
+
+            return $field->column() == $column;
+        });
     }
 
     /**
@@ -1045,7 +1020,7 @@ class Form implements Renderable
 
             $column = is_array($column) ? head($column) : $column;
 
-            list($relation) = explode('.', $column);
+            [ $relation ] = explode('.', $column);
 
             if (!in_array($relation, $relations)) {
                 return;
@@ -1208,19 +1183,12 @@ class Form implements Renderable
 
         foreach (Arr::flatten($columns) as $column) {
             if (Str::contains($column, '.')) {
-                list($relation) = explode('.', $column);
+                [ $relation ] = explode('.', $column);
 
-                if (
-                    method_exists($this->model, $relation) &&
-                    !method_exists(Model::class, $relation) &&
-                    $this->model->$relation() instanceof Relations\Relation
-                ) {
+                if (method_exists($this->model, $relation) && !method_exists(Model::class, $relation) && $this->model->$relation() instanceof Relations\Relation) {
                     $relations[] = $relation;
                 }
-            } elseif (
-                method_exists($this->model, $column) &&
-                !method_exists(Model::class, $column)
-            ) {
+            } elseif (method_exists($this->model, $column) && !method_exists(Model::class, $column)) {
                 $relations[] = $column;
             }
         }
@@ -1278,7 +1246,7 @@ class Form implements Renderable
     public function setWidth($fieldWidth = 8, $labelWidth = 2): self
     {
         $this->fields()->each(function ($field) use ($fieldWidth, $labelWidth) {
-            /* @var Field $field  */
+            /* @var Field $field */
             $field->setWidth($fieldWidth, $labelWidth);
         });
 
@@ -1325,7 +1293,7 @@ class Form implements Renderable
      */
     public function confirm(string $message, $on = null)
     {
-        if ($on && !in_array($on, ['create', 'edit'])) {
+        if ($on && !in_array($on, [ 'create', 'edit' ])) {
             throw new \InvalidArgumentException("The second paramater `\$on` must be one of ['create', 'edit']");
         }
 
@@ -1387,7 +1355,7 @@ class Form implements Renderable
      */
     public function isCreating(): bool
     {
-        return Str::endsWith(\request()->route()->getName(), ['.create', '.store']);
+        return Str::endsWith(\request()->route()->getName(), [ '.create', '.store' ]);
     }
 
     /**
@@ -1397,7 +1365,7 @@ class Form implements Renderable
      */
     public function isEditing(): bool
     {
-        return Str::endsWith(\request()->route()->getName(), ['.edit', '.update']);
+        return Str::endsWith(\request()->route()->getName(), [ '.edit', '.update' ]);
     }
 
     /**
@@ -1518,18 +1486,19 @@ class Form implements Renderable
         return implode('/', $segments);
     }
 
+    protected function prepareForm()
+    {
+        if (method_exists($this, 'form')) {
+            $this->form();
+        }
+    }
+
     /**
      * Render the form contents.
-     *
-     * @return string
      */
-    public function render()
+    public function render(): string
     {
-        try {
-            return $this->builder->render();
-        } catch (\Exception $e) {
-            return Handler::renderException($e);
-        }
+        return $this->builder->render();
     }
 
     /**

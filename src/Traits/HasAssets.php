@@ -7,60 +7,60 @@ trait HasAssets
     /**
      * @var array
      */
-    public static $script = [];
+    public static array $script = [];
 
     /**
      * @var array
      */
-    public static $deferredScript = [];
+    public static array $deferredScript = [];
 
     /**
      * @var array
      */
-    public static $style = [];
+    public static array $style = [];
 
     /**
      * @var array
      */
-    public static $css = [];
+    public static array $css = [];
 
     /**
      * @var array
      */
-    public static $js = [];
+    public static array $js = [];
 
     /**
      * @var array
      */
-    public static $html = [];
+    public static array $html = [];
 
     /**
      * @var array
      */
-    public static $headerJs = [];
+    public static array $headerJs = [];
 
     /**
      * @var string
      */
-    public static $manifest = 'vendor/laravel-admin/minify-manifest.json';
+    public static string $manifest = 'vendor/laravel-admin/minify-manifest.json';
 
     /**
      * @var array
      */
-    public static $manifestData = [];
+    public static array $manifestData = [];
 
     /**
      * @var array
      */
-    public static $min = [
-        'js'  => 'vendor/laravel-admin/laravel-admin.min.js',
+    public static array $min = [
+        'js' => 'vendor/laravel-admin/laravel-admin.min.js',
         'css' => 'vendor/laravel-admin/laravel-admin.min.css',
     ];
 
     /**
      * @var array
      */
-    public static $baseCss = [
+    public static array $baseCss = [
         'vendor/laravel-admin/AdminLTE/bootstrap/css/bootstrap.min.css',
         'vendor/laravel-admin/font-awesome/css/font-awesome.min.css',
         'vendor/laravel-admin/laravel-admin/laravel-admin.css',
@@ -71,12 +71,13 @@ trait HasAssets
         'vendor/laravel-admin/bootstrap3-editable/css/bootstrap-editable.css',
         'vendor/laravel-admin/google-fonts/fonts.css',
         'vendor/laravel-admin/AdminLTE/dist/css/AdminLTE.min.css',
+        'vendor/laravel-admin/laravel-admin/app.css',
     ];
 
     /**
      * @var array
      */
-    public static $baseJs = [
+    public static array $baseJs = [
         'vendor/laravel-admin/AdminLTE/bootstrap/js/bootstrap.min.js',
         'vendor/laravel-admin/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js',
         'vendor/laravel-admin/AdminLTE/dist/js/app.min.js',
@@ -92,27 +93,22 @@ trait HasAssets
     /**
      * @var string
      */
-    public static $jQuery = 'vendor/laravel-admin/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js';
+    public static string $jQuery = 'vendor/laravel-admin/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js';
 
     /**
      * @var array
      */
-    public static $minifyIgnores = [];
+    public static array $minifyIgnores = [];
 
     /**
      * Add css or get all css.
-     *
-     * @param null $css
-     * @param bool $minify
-     *
-     * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public static function css($css = null, $minify = true)
+    public static function css($css = null, bool $minify = true): \Illuminate\Contracts\View\Factory|array|\Illuminate\View\View
     {
         static::ignoreMinify($css, $minify);
 
         if (!is_null($css)) {
-            return self::$css = array_merge((array) $css, self::$css);
+            return self::$css = array_merge((array)$css, self::$css);
         }
 
         if (!$css = static::getMinifiedCss()) {
@@ -130,7 +126,7 @@ trait HasAssets
      *
      * @return array|null
      */
-    public static function baseCss($css = null, $minify = true)
+    public static function baseCss($css = null, bool $minify = true): ?array
     {
         static::ignoreMinify($css, $minify);
 
@@ -147,18 +143,13 @@ trait HasAssets
 
     /**
      * Add js or get all js.
-     *
-     * @param null $js
-     * @param bool $minify
-     *
-     * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public static function js($js = null, $minify = true)
+    public static function js($js = null, bool $minify = true): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|array|\Illuminate\Contracts\Foundation\Application
     {
         static::ignoreMinify($js, $minify);
 
         if (!is_null($js)) {
-            return self::$js = array_merge(self::$js, (array) $js);
+            return self::$js = array_merge(self::$js, (array)$js);
         }
 
         if (!$js = static::getMinifiedJs()) {
@@ -172,27 +163,17 @@ trait HasAssets
 
     /**
      * Add js or get all js.
-     *
-     * @param null $js
-     *
-     * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public static function headerJs($js = null)
+    public static function headerJs($js = null): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|array|\Illuminate\Contracts\Foundation\Application
     {
         if (!is_null($js)) {
-            return self::$headerJs = array_merge(self::$headerJs, (array) $js);
+            return self::$headerJs = array_merge(self::$headerJs, (array)$js);
         }
 
         return view('admin::partials.js', ['js' => array_unique(static::$headerJs)]);
     }
 
-    /**
-     * @param null $js
-     * @param bool $minify
-     *
-     * @return array|null
-     */
-    public static function baseJs($js = null, $minify = true)
+    public static function baseJs($js = null, bool $minify = true): ?array
     {
         static::ignoreMinify($js, $minify);
 
@@ -203,31 +184,21 @@ trait HasAssets
         return static::$baseJs;
     }
 
-    /**
-     * @param string $assets
-     * @param bool   $ignore
-     */
-    public static function ignoreMinify($assets, $ignore = true)
+    public static function ignoreMinify(string|array|null $assets, bool $ignore = true)
     {
         if (!$ignore) {
             static::$minifyIgnores[] = $assets;
         }
     }
 
-    /**
-     * @param string $script
-     * @param bool   $deferred
-     *
-     * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public static function script($script = '', $deferred = false)
+    public static function script(string $script = '', bool $deferred = false): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|array|\Illuminate\Contracts\Foundation\Application
     {
         if (!empty($script)) {
             if ($deferred) {
-                return self::$deferredScript = array_merge(self::$deferredScript, (array) $script);
+                return self::$deferredScript = array_merge(self::$deferredScript, (array)$script);
             }
 
-            return self::$script = array_merge(self::$script, (array) $script);
+            return self::$script = array_merge(self::$script, (array)$script);
         }
 
         $script = collect(static::$script)
@@ -253,7 +224,7 @@ trait HasAssets
     public static function style($style = '')
     {
         if (!empty($style)) {
-            return self::$style = array_merge(self::$style, (array) $style);
+            return self::$style = array_merge(self::$style, (array)$style);
         }
 
         $style = collect(static::$style)
@@ -273,7 +244,7 @@ trait HasAssets
     public static function html($html = '')
     {
         if (!empty($html)) {
-            return self::$html = array_merge(self::$html, (array) $html);
+            return self::$html = array_merge(self::$html, (array)$html);
         }
 
         return view('admin::partials.html', ['html' => array_unique(self::$html)]);
@@ -340,7 +311,7 @@ trait HasAssets
         $dom = new \DOMDocument();
 
         libxml_use_internal_errors(true);
-        $dom->loadHTML('<?xml encoding="utf-8" ?>'.$string);
+        $dom->loadHTML('<?xml encoding="utf-8" ?>' . $string);
         libxml_use_internal_errors(false);
 
         if ($head = $dom->getElementsByTagName('head')->item(0)) {
@@ -359,7 +330,7 @@ trait HasAssets
                         if ($child->hasAttribute('src')) {
                             static::js($child->getAttribute('src'));
                         } else {
-                            static::script(';(function () {'.$child->nodeValue.'})();');
+                            static::script(';(function () {' . $child->nodeValue . '})();');
                         }
 
                         continue;
@@ -379,7 +350,7 @@ trait HasAssets
                     }
 
                     if ($child->tagName == 'script' && !empty($child->nodeValue)) {
-                        static::script(';(function () {'.$child->nodeValue.'})();');
+                        static::script(';(function () {' . $child->nodeValue . '})();');
                         continue;
                     }
 

@@ -122,6 +122,8 @@ class UserController extends AdminController
             }
         });
 
+        $form->cleanFooter();
+
         return $form;
     }
 }

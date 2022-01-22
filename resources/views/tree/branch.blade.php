@@ -1,5 +1,5 @@
 <li class="dd-item" data-id="{{ $branch[$keyName] }}">
-    <div class="dd-handle">
+    <div class="dd-handle" style="border-radius: 8px;">
         {!! $branchCallback($branch) !!}
         <span class="pull-right dd-nodrag">
             <a href="{{ url("$path/$branch[$keyName]/edit") }}"><i class="fa fa-edit"></i></a>

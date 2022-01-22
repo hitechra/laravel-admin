@@ -94,6 +94,8 @@ class RoleController extends AdminController
             $footer->clean();
         });
 
+        $form->cleanFooter();
+
         return $form;
     }
 }

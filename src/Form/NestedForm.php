@@ -51,6 +51,7 @@ use Illuminate\Support\Collection;
  * @method Field\Tags           tags($column, $label = '')
  * @method Field\Icon           icon($column, $label = '')
  * @method Field\Embeds         embeds($column, $label = '')
+ * @method Field\Trix           trix($column, $label = '')
  */
 class NestedForm
 {
