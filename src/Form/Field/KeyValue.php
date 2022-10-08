@@ -16,8 +16,7 @@ class KeyValue extends Field
     /**
      * Fill data to the field.
      *
-     * @param array $data
-     *
+     * @param  array  $data
      * @return void
      */
     public function fill($data)

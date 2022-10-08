@@ -83,7 +83,7 @@ class EmbeddedForm
     /**
      * EmbeddedForm constructor.
      *
-     * @param string $column
+     * @param  string  $column
      */
     public function __construct($column)
     {
@@ -105,8 +105,7 @@ class EmbeddedForm
     /**
      * Set parent form for this form.
      *
-     * @param Form $parent
-     *
+     * @param  Form  $parent
      * @return $this
      */
     public function setParent(Form $parent)
@@ -119,8 +118,7 @@ class EmbeddedForm
     /**
      * Set parent form for this form.
      *
-     * @param WidgetForm $parent
-     *
+     * @param  WidgetForm  $parent
      * @return $this
      */
     public function setParentWidgetForm(WidgetForm $parent)
@@ -133,8 +131,7 @@ class EmbeddedForm
     /**
      * Set original values for fields.
      *
-     * @param array $data
-     *
+     * @param  array  $data
      * @return $this
      */
     public function setOriginal($data)
@@ -155,8 +152,7 @@ class EmbeddedForm
     /**
      * Prepare for insert or update.
      *
-     * @param array $input
-     *
+     * @param  array  $input
      * @return mixed
      */
     public function prepare($input)
@@ -172,9 +168,8 @@ class EmbeddedForm
     /**
      * Do prepare work for each field.
      *
-     * @param string $key
-     * @param string $record
-     *
+     * @param  string  $key
+     * @param  string  $record
      * @return mixed
      */
     protected function prepareValue($key, $record)
@@ -193,8 +188,7 @@ class EmbeddedForm
     /**
      * Set original data for each field.
      *
-     * @param string $key
-     *
+     * @param  string  $key
      * @return void
      */
     protected function setFieldOriginalValue($key)
@@ -211,8 +205,7 @@ class EmbeddedForm
     /**
      * Fill data to all fields in form.
      *
-     * @param array $data
-     *
+     * @param  array  $data
      * @return $this
      */
     public function fill(array $data)
@@ -227,8 +220,7 @@ class EmbeddedForm
     /**
      * Format form, set `element name` `error key` and `element class`.
      *
-     * @param Field $field
-     *
+     * @param  Field  $field
      * @return Field
      */
     protected function formatField(Field $field)
@@ -259,8 +251,7 @@ class EmbeddedForm
     /**
      * Add a field to form.
      *
-     * @param Field $field
-     *
+     * @param  Field  $field
      * @return $this
      */
     public function pushField(Field $field)
@@ -275,9 +266,8 @@ class EmbeddedForm
     /**
      * Add nested-form fields dynamically.
      *
-     * @param string $method
-     * @param array  $arguments
-     *
+     * @param  string  $method
+     * @param  array  $arguments
      * @return Field|$this
      */
     public function __call($method, $arguments)

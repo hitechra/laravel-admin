@@ -6,7 +6,6 @@ use Hitechra\Admin\Traits\DefaultDatetimeFormat;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -22,6 +21,8 @@ class Administrator extends Model implements AuthenticatableContract
 
     protected $fillable = ['username', 'email', 'password', 'name', 'avatar'];
 
+    protected $hidden = ['password'];
+
     public function getConnectionName()
     {
         return config('admin.database.connection') ?: config('database.default');
@@ -35,8 +36,7 @@ class Administrator extends Model implements AuthenticatableContract
     /**
      * Get avatar attribute.
      *
-     * @param string $avatar
-     *
+     * @param  string  $avatar
      * @return string
      */
     public function getAvatarAttribute($avatar)

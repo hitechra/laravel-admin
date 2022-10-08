@@ -24,8 +24,7 @@ trait HasActions
     /**
      * Set grid action callback.
      *
-     * @param Closure|string $actions
-     *
+     * @param  Closure|string  $actions
      * @return $this
      */
     public function actions($actions)
@@ -56,8 +55,7 @@ trait HasActions
     }
 
     /**
-     * @param string $actionClass
-     *
+     * @param  string  $actionClass
      * @return $this
      */
     public function setActionClass(string $actionClass)
@@ -82,8 +80,7 @@ trait HasActions
     /**
      * Set grid batch-action callback.
      *
-     * @param Closure $closure
-     *
+     * @param  Closure  $closure
      * @return $this
      */
     public function batchActions(Closure $closure)
@@ -96,8 +93,7 @@ trait HasActions
     }
 
     /**
-     * @param bool $disable
-     *
+     * @param  bool  $disable
      * @return Grid|mixed
      */
     public function disableBatchActions(bool $disable = true)

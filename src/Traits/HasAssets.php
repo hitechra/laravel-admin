@@ -108,7 +108,7 @@ trait HasAssets
         static::ignoreMinify($css, $minify);
 
         if (!is_null($css)) {
-            return self::$css = array_merge((array)$css, self::$css);
+            return self::$css = array_merge((array) $css, self::$css);
         }
 
         if (!$css = static::getMinifiedCss()) {
@@ -121,9 +121,8 @@ trait HasAssets
     }
 
     /**
-     * @param null $css
-     * @param bool $minify
-     *
+     * @param  null  $css
+     * @param  bool  $minify
      * @return array|null
      */
     public static function baseCss($css = null, bool $minify = true): ?array
@@ -149,7 +148,7 @@ trait HasAssets
         static::ignoreMinify($js, $minify);
 
         if (!is_null($js)) {
-            return self::$js = array_merge(self::$js, (array)$js);
+            return self::$js = array_merge(self::$js, (array) $js);
         }
 
         if (!$js = static::getMinifiedJs()) {
@@ -167,7 +166,7 @@ trait HasAssets
     public static function headerJs($js = null): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|array|\Illuminate\Contracts\Foundation\Application
     {
         if (!is_null($js)) {
-            return self::$headerJs = array_merge(self::$headerJs, (array)$js);
+            return self::$headerJs = array_merge(self::$headerJs, (array) $js);
         }
 
         return view('admin::partials.js', ['js' => array_unique(static::$headerJs)]);
@@ -195,10 +194,10 @@ trait HasAssets
     {
         if (!empty($script)) {
             if ($deferred) {
-                return self::$deferredScript = array_merge(self::$deferredScript, (array)$script);
+                return self::$deferredScript = array_merge(self::$deferredScript, (array) $script);
             }
 
-            return self::$script = array_merge(self::$script, (array)$script);
+            return self::$script = array_merge(self::$script, (array) $script);
         }
 
         $script = collect(static::$script)
@@ -217,14 +216,13 @@ trait HasAssets
     }
 
     /**
-     * @param string $style
-     *
+     * @param  string  $style
      * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public static function style($style = '')
     {
         if (!empty($style)) {
-            return self::$style = array_merge(self::$style, (array)$style);
+            return self::$style = array_merge(self::$style, (array) $style);
         }
 
         $style = collect(static::$style)
@@ -237,22 +235,20 @@ trait HasAssets
     }
 
     /**
-     * @param string $html
-     *
+     * @param  string  $html
      * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public static function html($html = '')
     {
         if (!empty($html)) {
-            return self::$html = array_merge(self::$html, (array)$html);
+            return self::$html = array_merge(self::$html, (array) $html);
         }
 
         return view('admin::partials.html', ['html' => array_unique(self::$html)]);
     }
 
     /**
-     * @param string $key
-     *
+     * @param  string  $key
      * @return mixed
      */
     protected static function getManifestData($key)
@@ -311,7 +307,7 @@ trait HasAssets
         $dom = new \DOMDocument();
 
         libxml_use_internal_errors(true);
-        $dom->loadHTML('<?xml encoding="utf-8" ?>' . $string);
+        $dom->loadHTML('<?xml encoding="utf-8" ?>'.$string);
         libxml_use_internal_errors(false);
 
         if ($head = $dom->getElementsByTagName('head')->item(0)) {
@@ -319,6 +315,7 @@ trait HasAssets
                 if ($child instanceof \DOMElement) {
                     if ($child->tagName == 'style' && !empty($child->nodeValue)) {
                         static::style($child->nodeValue);
+
                         continue;
                     }
 
@@ -330,7 +327,7 @@ trait HasAssets
                         if ($child->hasAttribute('src')) {
                             static::js($child->getAttribute('src'));
                         } else {
-                            static::script(';(function () {' . $child->nodeValue . '})();');
+                            static::script(';(function () {'.$child->nodeValue.'})();');
                         }
 
                         continue;
@@ -346,11 +343,13 @@ trait HasAssets
                 if ($child instanceof \DOMElement) {
                     if ($child->tagName == 'style' && !empty($child->nodeValue)) {
                         static::style($child->nodeValue);
+
                         continue;
                     }
 
                     if ($child->tagName == 'script' && !empty($child->nodeValue)) {
-                        static::script(';(function () {' . $child->nodeValue . '})();');
+                        static::script(';(function () {'.$child->nodeValue.'})();');
+
                         continue;
                     }
 
@@ -360,6 +359,7 @@ trait HasAssets
                             $html .= $child->ownerDocument->saveHTML($childNode);
                         }
                         $html && static::html($html);
+
                         continue;
                     }
                 }

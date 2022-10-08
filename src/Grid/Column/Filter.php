@@ -20,7 +20,7 @@ class Filter implements Renderable
     protected $parent;
 
     /**
-     * @param Column $column
+     * @param  Column  $column
      */
     public function setParent(Column $column)
     {
@@ -40,8 +40,7 @@ class Filter implements Renderable
     /**
      * Get filter value of this column.
      *
-     * @param string $default
-     *
+     * @param  string  $default
      * @return array|\Illuminate\Http\Request|string
      */
     public function getFilterValue($default = '')
@@ -69,8 +68,7 @@ class Filter implements Renderable
     }
 
     /**
-     * @param string $key
-     *
+     * @param  string  $key
      * @return array|null|string
      */
     protected function trans($key)
@@ -81,8 +79,8 @@ class Filter implements Renderable
     /**
      * Add a query binding.
      *
-     * @param mixed $value
-     * @param Model $model
+     * @param  mixed  $value
+     * @param  Model  $model
      */
     public function addBinding($value, Model $model)
     {

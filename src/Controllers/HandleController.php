@@ -2,12 +2,12 @@
 
 namespace Hitechra\Admin\Controllers;
 
+use Exception;
 use Hitechra\Admin\Actions\Action;
 use Hitechra\Admin\Actions\GridAction;
 use Hitechra\Admin\Actions\Response;
 use Hitechra\Admin\Actions\RowAction;
 use Hitechra\Admin\Widgets\Form;
-use Exception;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -17,8 +17,7 @@ use Illuminate\Support\Collection;
 class HandleController extends Controller
 {
     /**
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return $this|mixed
      */
     public function handleForm(Request $request)
@@ -33,11 +32,10 @@ class HandleController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
+     * @return Form
      *
      * @throws Exception
-     *
-     * @return Form
      */
     protected function resolveForm(Request $request)
     {
@@ -62,8 +60,7 @@ class HandleController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return $this|\Illuminate\Http\JsonResponse
      */
     public function handleAction(Request $request)
@@ -100,11 +97,10 @@ class HandleController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
+     * @return Action
      *
      * @throws Exception
-     *
-     * @return Action
      */
     protected function resolveActionInstance(Request $request)
     {
@@ -129,9 +125,8 @@ class HandleController extends Controller
     }
 
     /**
-     * @param Request               $request
-     * @param Model|Collection|bool $model
-     *
+     * @param  Request  $request
+     * @param  Model|Collection|bool  $model
      * @return array
      */
     protected function resolveActionArgs(Request $request, $model = null)
@@ -146,8 +141,7 @@ class HandleController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return mixed|string|string[]
      */
     public function handleSelectable(Request $request)
@@ -168,8 +162,7 @@ class HandleController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return mixed|string|string[]
      */
     public function handleRenderable(Request $request)

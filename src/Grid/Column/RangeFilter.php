@@ -15,22 +15,22 @@ class RangeFilter extends Filter
     /**
      * RangeFilter constructor.
      *
-     * @param string $type
+     * @param  string  $type
      */
     public function __construct($type)
     {
         $this->type = $type;
         $this->class = [
             'start' => uniqid('column-filter-start-'),
-            'end'   => uniqid('column-filter-end-'),
+            'end' => uniqid('column-filter-end-'),
         ];
     }
 
     /**
      * Add a binding to the query.
      *
-     * @param mixed $value
-     * @param Model $model
+     * @param  mixed  $value
+     * @param  Model  $model
      */
     public function addBinding($value, Model $model)
     {
@@ -52,7 +52,7 @@ class RangeFilter extends Filter
     protected function addScript()
     {
         $options = [
-            'locale'           => config('app.locale'),
+            'locale' => config('app.locale'),
             'allowInputToggle' => true,
         ];
 

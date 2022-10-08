@@ -100,9 +100,9 @@ class MakeCommand extends GeneratorCommand
     }
 
     /**
-     * @throws \ReflectionException
-     *
      * @return array|bool|string|null
+     *
+     * @throws \ReflectionException
      */
     protected function getTitle()
     {
@@ -114,7 +114,7 @@ class MakeCommand extends GeneratorCommand
     }
 
     /**
-     * @param string $modelName
+     * @param  string  $modelName
      */
     protected function output($modelName)
     {
@@ -142,9 +142,8 @@ class MakeCommand extends GeneratorCommand
     /**
      * Replace the class name for the given stub.
      *
-     * @param string $stub
-     * @param string $name
-     *
+     * @param  string  $stub
+     * @param  string  $name
      * @return string
      */
     protected function replaceClass($stub, $name)
@@ -173,8 +172,7 @@ class MakeCommand extends GeneratorCommand
     }
 
     /**
-     * @param string $code
-     *
+     * @param  string  $code
      * @return string
      */
     protected function indentCodes($code)
@@ -205,8 +203,7 @@ class MakeCommand extends GeneratorCommand
     /**
      * Get the default namespace for the class.
      *
-     * @param string $rootNamespace
-     *
+     * @param  string  $rootNamespace
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace)

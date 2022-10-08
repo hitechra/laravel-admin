@@ -41,10 +41,10 @@ class ValuePicker
     /**
      * ValuePicker constructor.
      *
-     * @param string $selecteable
-     * @param string $column
-     * @param bool   $multiple
-     * @param string $separator
+     * @param  string  $selecteable
+     * @param  string  $column
+     * @param  bool  $multiple
+     * @param  string  $separator
      */
     public function __construct($selecteable, $column = '', $multiple = false, $separator = ';')
     {
@@ -55,8 +55,7 @@ class ValuePicker
     }
 
     /**
-     * @param int $multiple
-     *
+     * @param  int  $multiple
      * @return string
      */
     protected function getLoadUrl()
@@ -69,8 +68,8 @@ class ValuePicker
     }
 
     /**
-     * @param Field         $field
-     * @param \Closure|null $callback
+     * @param  Field  $field
+     * @param  \Closure|null  $callback
      */
     public function mount(Field $field, \Closure $callback = null)
     {
@@ -80,19 +79,19 @@ class ValuePicker
         $this->addPickBtn($callback);
 
         Admin::component('admin::components.filepicker', [
-            'url'       => $this->getLoadUrl(),
-            'modal'     => $this->modal,
-            'selector'  => $this->field->getElementClassSelector(),
+            'url' => $this->getLoadUrl(),
+            'modal' => $this->modal,
+            'selector' => $this->field->getElementClassSelector(),
             'separator' => $this->separator,
-            'multiple'  => $this->multiple,
-            'is_file'   => $this->field instanceof File,
-            'is_image'  => $this->field instanceof Image,
-            'url_tpl'   => $this->field instanceof File ? $this->field->objectUrl('__URL__') : '',
+            'multiple' => $this->multiple,
+            'is_file' => $this->field instanceof File,
+            'is_image' => $this->field instanceof Image,
+            'url_tpl' => $this->field instanceof File ? $this->field->objectUrl('__URL__') : '',
         ]);
     }
 
     /**
-     * @param \Closure|null $callback
+     * @param  \Closure|null  $callback
      */
     protected function addPickBtn(\Closure $callback = null)
     {
@@ -112,8 +111,7 @@ HTML;
     }
 
     /**
-     * @param string $field
-     *
+     * @param  string  $field
      * @return array|\Illuminate\Support\Collection
      */
     public function getPreview(string $field)
@@ -128,8 +126,8 @@ HTML;
 
         return collect(Arr::wrap($value))->map(function ($item) use ($field) {
             return [
-                'url'     => $this->field->objectUrl($item),
-                'value'   => $item,
+                'url' => $this->field->objectUrl($item),
+                'value' => $item,
                 'is_file' => $field == File::class,
             ];
         });

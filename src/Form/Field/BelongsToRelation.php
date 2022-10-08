@@ -20,8 +20,8 @@ trait BelongsToRelation
     /**
      * BelongsToRelation constructor.
      *
-     * @param string $column
-     * @param array  $arguments
+     * @param  string  $column
+     * @param  array  $arguments
      */
     public function __construct($column, $arguments = [])
     {
@@ -31,7 +31,7 @@ trait BelongsToRelation
     }
 
     /**
-     * @param string $selectable
+     * @param  string  $selectable
      */
     protected function setSelectable($selectable)
     {
@@ -53,8 +53,7 @@ trait BelongsToRelation
     }
 
     /**
-     * @param int $multiple
-     *
+     * @param  int  $multiple
      * @return string
      */
     protected function getLoadUrl($multiple = 0)
@@ -163,7 +162,7 @@ STYLE;
         $this->addScript()->addHtml()->addStyle();
 
         $this->addVariables([
-            'grid'    => $this->makeGrid(),
+            'grid' => $this->makeGrid(),
             'options' => $this->getOptions(),
         ]);
 

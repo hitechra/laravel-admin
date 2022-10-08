@@ -77,7 +77,6 @@ class Tags extends Field
      *
      * @param $visibleColumn
      * @param $key
-     *
      * @return $this
      */
     public function pluck($visibleColumn, $key)
@@ -95,8 +94,7 @@ class Tags extends Field
     /**
      * Set the field options.
      *
-     * @param array|Collection|Arrayable $options
-     *
+     * @param  array|Collection|Arrayable  $options
      * @return $this|Field
      */
     public function options($options = [])
@@ -121,8 +119,7 @@ class Tags extends Field
     /**
      * Set Tag Separators.
      *
-     * @param array $separators
-     *
+     * @param  array  $separators
      * @return $this
      */
     public function separators($separators = [])
@@ -140,8 +137,7 @@ class Tags extends Field
     /**
      * Set save Action.
      *
-     * @param \Closure $saveAction
-     *
+     * @param  \Closure  $saveAction
      * @return $this
      */
     public function saving(\Closure $saveAction)
@@ -172,8 +168,7 @@ class Tags extends Field
     /**
      * Get or set value for this field.
      *
-     * @param mixed $value
-     *
+     * @param  mixed  $value
      * @return $this|array|mixed
      */
     public function value($value = null)
@@ -205,7 +200,7 @@ class Tags extends Field
         }
 
         return parent::fieldRender([
-            'options'    => $options,
+            'options' => $options,
             'keyAsValue' => $this->keyAsValue,
         ]);
     }

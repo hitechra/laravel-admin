@@ -20,7 +20,7 @@ class PerPageSelector extends AbstractTool
     /**
      * Create a new PerPageSelector instance.
      *
-     * @param Grid $grid
+     * @param  Grid  $grid
      */
     public function __construct(Grid $grid)
     {
@@ -75,7 +75,7 @@ class PerPageSelector extends AbstractTool
         })->implode("\r\n");
 
         $trans = [
-            'show'    => trans('admin.show'),
+            'show' => trans('admin.show'),
             'entries' => trans('admin.entries'),
         ];
 

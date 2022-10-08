@@ -11,7 +11,9 @@ class Exporter
      * Export scope constants.
      */
     const SCOPE_ALL = 'all';
+
     const SCOPE_CURRENT_PAGE = 'page';
+
     const SCOPE_SELECTED_ROWS = 'selected';
 
     /**
@@ -41,7 +43,7 @@ class Exporter
     /**
      * Create a new Exporter instance.
      *
-     * @param Grid $grid
+     * @param  Grid  $grid
      */
     public function __construct(Grid $grid)
     {
@@ -74,8 +76,7 @@ class Exporter
     /**
      * Resolve export driver.
      *
-     * @param string $driver
-     *
+     * @param  string  $driver
      * @return CsvExporter
      */
     public function resolve($driver)
@@ -90,8 +91,7 @@ class Exporter
     /**
      * Get export driver.
      *
-     * @param string $driver
-     *
+     * @param  string  $driver
      * @return CsvExporter
      */
     protected function getExporter($driver)
@@ -120,9 +120,8 @@ class Exporter
     /**
      * Format query for export url.
      *
-     * @param int  $scope
-     * @param null $args
-     *
+     * @param  int  $scope
+     * @param  null  $args
      * @return array
      */
     public static function formatExportQuery($scope = '', $args = null)

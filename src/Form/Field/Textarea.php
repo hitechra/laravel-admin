@@ -24,8 +24,7 @@ class Textarea extends Field
     /**
      * Set rows of textarea.
      *
-     * @param int $rows
-     *
+     * @param  int  $rows
      * @return $this
      */
     public function rows($rows = 5)
@@ -54,12 +53,12 @@ class Textarea extends Field
 
         return parent::fieldRender([
             'append' => $this->append,
-            'rows'   => $this->rows,
+            'rows' => $this->rows,
         ]);
     }
 
     /**
-     * @param string $wrap
+     * @param  string  $wrap
      */
     protected function addPickBtn($btn)
     {

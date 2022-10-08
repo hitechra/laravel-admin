@@ -86,8 +86,7 @@ class Response
     }
 
     /**
-     * @param string $message
-     *
+     * @param  string  $message
      * @return $this
      */
     public function success(string $message = '')
@@ -96,8 +95,7 @@ class Response
     }
 
     /**
-     * @param string $message
-     *
+     * @param  string  $message
      * @return $this
      */
     public function info(string $message = '')
@@ -106,8 +104,7 @@ class Response
     }
 
     /**
-     * @param string $message
-     *
+     * @param  string  $message
      * @return $this
      */
     public function warning(string $message = '')
@@ -116,8 +113,7 @@ class Response
     }
 
     /**
-     * @param string $message
-     *
+     * @param  string  $message
      * @return $this
      */
     public function error(string $message = '')
@@ -126,9 +122,8 @@ class Response
     }
 
     /**
-     * @param string $type
-     * @param string $title
-     *
+     * @param  string  $type
+     * @param  string  $title
      * @return $this
      */
     protected function show($type, $title = '')
@@ -141,8 +136,7 @@ class Response
     /**
      * Send a redirect response.
      *
-     * @param string $url
-     *
+     * @param  string  $url
      * @return $this
      */
     public function redirect(string $url)
@@ -155,7 +149,7 @@ class Response
     /**
      * Send a open new window response.
      *
-     * @param string $url
+     * @param  string  $url
      */
     public function open(string $url)
     {
@@ -167,8 +161,7 @@ class Response
     /**
      * Send a location redirect response.
      *
-     * @param string $location
-     *
+     * @param  string  $location
      * @return $this
      */
     public function location(string $location)
@@ -181,8 +174,7 @@ class Response
     /**
      * Send a download response.
      *
-     * @param string $url
-     *
+     * @param  string  $url
      * @return $this
      */
     public function download($url)
@@ -207,8 +199,7 @@ class Response
     /**
      * Send a html response.
      *
-     * @param string $html
-     *
+     * @param  string  $html
      * @return $this
      */
     public function html($html = '')
@@ -219,8 +210,7 @@ class Response
     }
 
     /**
-     * @param \Exception $exception
-     *
+     * @param  \Exception  $exception
      * @return mixed
      */
     public static function withException(\Exception $exception)
@@ -256,9 +246,8 @@ class Response
     }
 
     /**
-     * @param string $method
-     * @param array  $arguments
-     *
+     * @param  string  $method
+     * @param  array  $arguments
      * @return $this
      */
     public function __call($method, $arguments)

@@ -35,7 +35,7 @@ class PermissionController extends AdminController
 
         $grid->column('http_path', trans('admin.route'))->display(function ($path) {
             return collect(explode("\n", $path))->map(function ($path) {
-                $method = $this->http_method ?: [ 'ANY' ];
+                $method = $this->http_method ?: ['ANY'];
 
                 if (Str::contains($path, ':')) {
                     [ $method, $path ] = explode(':', $path);
@@ -49,7 +49,7 @@ class PermissionController extends AdminController
                 })->implode('&nbsp;');
 
                 if (!empty(config('admin.route.prefix'))) {
-                    $path = '/' . trim(config('admin.route.prefix'), '/') . $path;
+                    $path = '/'.trim(config('admin.route.prefix'), '/').$path;
                 }
 
                 return "<div style='margin-bottom: 5px;'>$method<code>$path</code></div>";
@@ -74,8 +74,7 @@ class PermissionController extends AdminController
     /**
      * Make a show builder.
      *
-     * @param mixed $id
-     *
+     * @param  mixed  $id
      * @return Show
      */
     protected function detail($id)
@@ -90,7 +89,7 @@ class PermissionController extends AdminController
 
         $show->field('http_path', trans('admin.route'))->unescape()->as(function ($path) {
             return collect(explode("\r\n", $path))->map(function ($path) {
-                $method = $this->http_method ?: [ 'ANY' ];
+                $method = $this->http_method ?: ['ANY'];
 
                 if (Str::contains($path, ':')) {
                     [ $method, $path ] = explode(':', $path);
@@ -104,7 +103,7 @@ class PermissionController extends AdminController
                 })->implode('&nbsp;');
 
                 if (!empty(config('admin.route.prefix'))) {
-                    $path = '/' . trim(config('admin.route.prefix'), '/') . $path;
+                    $path = '/'.trim(config('admin.route.prefix'), '/').$path;
                 }
 
                 return "<div style='margin-bottom: 5px;'>$method<code>$path</code></div>";

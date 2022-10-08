@@ -2,9 +2,9 @@
 
 use Illuminate\Routing\Router;
 
-Admin::routes();
+\Hitechra\Admin\Facades\Admin::routes();
 
-Route::group([
+\Illuminate\Support\Facades\Route::group([
     'prefix'        => config('admin.route.prefix'),
     'namespace'     => config('admin.route.namespace'),
     'middleware'    => config('admin.route.middleware'),

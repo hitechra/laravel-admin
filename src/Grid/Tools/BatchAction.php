@@ -38,8 +38,7 @@ abstract class BatchAction implements Renderable
     /**
      * Set title for this action.
      *
-     * @param string $title
-     *
+     * @param  string  $title
      * @return $this
      */
     public function setTitle($title)
@@ -58,7 +57,7 @@ abstract class BatchAction implements Renderable
     }
 
     /**
-     * @param Grid $grid
+     * @param  Grid  $grid
      */
     public function setGrid(Grid $grid)
     {
@@ -76,8 +75,7 @@ abstract class BatchAction implements Renderable
     }
 
     /**
-     * @param bool $dotPrefix
-     *
+     * @param  bool  $dotPrefix
      * @return string
      */
     public function getElementClass($dotPrefix = true)

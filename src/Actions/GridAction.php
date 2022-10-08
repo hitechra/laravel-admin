@@ -24,8 +24,7 @@ abstract class GridAction extends Action
     public $selectorPrefix = '.grid-action-';
 
     /**
-     * @param Grid $grid
-     *
+     * @param  Grid  $grid
      * @return $this
      */
     public function setGrid(Grid $grid)
@@ -67,7 +66,6 @@ abstract class GridAction extends Action
      * Indicates if model uses soft-deletes.
      *
      * @param $modelClass
-     *
      * @return bool
      */
     protected function modelUseSoftDeletes($modelClass)

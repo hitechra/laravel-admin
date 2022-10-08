@@ -18,9 +18,9 @@ class MultipleSelect extends Select
     /**
      * Get other key for this many-to-many relation.
      *
-     * @throws \Exception
-     *
      * @return string
+     *
+     * @throws \Exception
      */
     protected function getOtherKey()
     {
@@ -75,7 +75,7 @@ class MultipleSelect extends Select
                 $this->value[] = Arr::get($relation, "pivot.{$this->getOtherKey()}");
             }
 
-            // MultipleSelect value store as a column.
+        // MultipleSelect value store as a column.
         } else {
             $this->value = $relations;
         }
@@ -109,7 +109,7 @@ class MultipleSelect extends Select
                 $this->original[] = Arr::get($relation, "pivot.{$this->getOtherKey()}");
             }
 
-            // MultipleSelect value store as a column.
+        // MultipleSelect value store as a column.
         } else {
             $this->original = $relations;
         }

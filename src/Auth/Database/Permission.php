@@ -27,7 +27,7 @@ class Permission extends Model
     /**
      * Create a new Eloquent model instance.
      *
-     * @param array $attributes
+     * @param  array  $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -57,8 +57,7 @@ class Permission extends Model
     /**
      * If request should pass through the current permission.
      *
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return bool
      */
     public function shouldPassThrough(Request $request): bool
@@ -73,7 +72,7 @@ class Permission extends Model
             $path = trim(config('admin.route.prefix'), '/').$path;
 
             if (Str::contains($path, ':')) {
-                list($method, $path) = explode(':', $path);
+                [$method, $path] = explode(':', $path);
                 $method = explode(',', $method);
             }
 
@@ -92,8 +91,7 @@ class Permission extends Model
     /**
      * filter \r.
      *
-     * @param string $path
-     *
+     * @param  string  $path
      * @return mixed
      */
     public function getHttpPathAttribute($path)
@@ -104,9 +102,8 @@ class Permission extends Model
     /**
      * If a request match the specific HTTP method and path.
      *
-     * @param array   $match
-     * @param Request $request
-     *
+     * @param  array  $match
+     * @param  Request  $request
      * @return bool
      */
     protected function matchRequest(array $match, Request $request): bool
@@ -140,7 +137,6 @@ class Permission extends Model
 
     /**
      * @param $method
-     *
      * @return array
      */
     public function getHttpMethodAttribute($method)

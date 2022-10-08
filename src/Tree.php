@@ -35,7 +35,7 @@ class Tree implements Renderable
      * @var string
      */
     protected $view = [
-        'tree'   => 'admin::tree',
+        'tree' => 'admin::tree',
         'branch' => 'admin::tree.branch',
     ];
 
@@ -79,9 +79,9 @@ class Tree implements Renderable
     /**
      * Menu constructor.
      *
-     * @param Model|null $model
+     * @param  Model|null  $model
      */
-    public function __construct(Model $model = null, \Closure $callback = null)
+    public function __construct(Model $model = null, Closure $callback = null)
     {
         $this->model = $model;
 
@@ -125,11 +125,10 @@ class Tree implements Renderable
     /**
      * Set branch callback.
      *
-     * @param \Closure $branchCallback
-     *
+     * @param  \Closure  $branchCallback
      * @return $this
      */
-    public function branch(\Closure $branchCallback)
+    public function branch(Closure $branchCallback)
     {
         $this->branchCallback = $branchCallback;
 
@@ -141,7 +140,7 @@ class Tree implements Renderable
      *
      * @return Model
      */
-    public function query(\Closure $callback)
+    public function query(Closure $callback)
     {
         $this->queryCallback = $callback;
 
@@ -151,8 +150,7 @@ class Tree implements Renderable
     /**
      * Set nestable options.
      *
-     * @param array $options
-     *
+     * @param  array  $options
      * @return $this
      */
     public function nestable($options = [])
@@ -195,8 +193,7 @@ class Tree implements Renderable
     /**
      * Save tree order from a input.
      *
-     * @param string $serialize
-     *
+     * @param  string  $serialize
      * @return bool
      */
     public function saveOrder($serialize)
@@ -220,12 +217,12 @@ class Tree implements Renderable
     protected function script()
     {
         $trans = [
-            'delete_confirm'    => str_replace("'", "\'", trans('admin.delete_confirm')),
-            'save_succeeded'    => str_replace("'", "\'", trans('admin.save_succeeded')),
+            'delete_confirm' => str_replace("'", "\'", trans('admin.delete_confirm')),
+            'save_succeeded' => str_replace("'", "\'", trans('admin.save_succeeded')),
             'refresh_succeeded' => str_replace("'", "\'", trans('admin.refresh_succeeded')),
-            'delete_succeeded'  => str_replace("'", "\'", trans('admin.delete_succeeded')),
-            'confirm'           => str_replace("'", "\'", trans('admin.confirm')),
-            'cancel'            => str_replace("'", "\'", trans('admin.cancel')),
+            'delete_succeeded' => str_replace("'", "\'", trans('admin.delete_succeeded')),
+            'confirm' => str_replace("'", "\'", trans('admin.confirm')),
+            'cancel' => str_replace("'", "\'", trans('admin.cancel')),
         ];
 
         $nestableOptions = json_encode($this->nestableOptions);
@@ -310,7 +307,7 @@ SCRIPT;
     /**
      * Set view of tree.
      *
-     * @param string $view
+     * @param  string  $view
      */
     public function setView($view)
     {
@@ -335,11 +332,11 @@ SCRIPT;
     public function variables()
     {
         return [
-            'id'         => $this->elementId,
-            'tools'      => $this->tools->render(),
-            'items'      => $this->getItems(),
-            'useCreate'  => $this->useCreate,
-            'useSave'    => $this->useSave,
+            'id' => $this->elementId,
+            'tools' => $this->tools->render(),
+            'items' => $this->getItems(),
+            'useCreate' => $this->useCreate,
+            'useSave' => $this->useSave,
             'useRefresh' => $this->useRefresh,
         ];
     }
@@ -347,8 +344,7 @@ SCRIPT;
     /**
      * Setup grid tools.
      *
-     * @param Closure $callback
-     *
+     * @param  Closure  $callback
      * @return void
      */
     public function tools(Closure $callback)
@@ -366,9 +362,9 @@ SCRIPT;
         Admin::script($this->script());
 
         view()->share([
-            'path'           => $this->path,
-            'keyName'        => $this->model->getKeyName(),
-            'branchView'     => $this->view['branch'],
+            'path' => $this->path,
+            'keyName' => $this->model->getKeyName(),
+            'branchView' => $this->view['branch'],
             'branchCallback' => $this->branchCallback,
         ]);
 

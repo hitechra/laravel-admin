@@ -52,8 +52,7 @@ trait HasFilter
     /**
      * Process the grid filter.
      *
-     * @param bool $toArray
-     *
+     * @param  bool  $toArray
      * @return array|Collection|mixed
      */
     public function applyFilter($toArray = true)
@@ -68,7 +67,7 @@ trait HasFilter
     /**
      * Set the grid filter.
      *
-     * @param Closure $callback
+     * @param  Closure  $callback
      */
     public function filter(Closure $callback)
     {

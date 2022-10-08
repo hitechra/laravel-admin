@@ -23,7 +23,7 @@ class Column
     /**
      * Column constructor.
      *
-     * @param int $width
+     * @param  int  $width
      */
     public function __construct($width = 12)
     {
@@ -34,7 +34,7 @@ class Column
     /**
      * Add a filter to this column.
      *
-     * @param Field $field
+     * @param  Field  $field
      */
     public function add(Field $field)
     {
@@ -66,7 +66,7 @@ class Column
     /**
      * Set column width.
      *
-     * @param int $width
+     * @param  int  $width
      */
     public function setWidth($width)
     {

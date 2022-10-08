@@ -22,7 +22,7 @@ class Radio extends Presenter
     /**
      * Radio constructor.
      *
-     * @param array $options
+     * @param  array  $options
      */
     public function __construct($options = [])
     {
@@ -63,7 +63,7 @@ class Radio extends Presenter
 
         return [
             'options' => $this->options,
-            'inline'  => $this->inline,
+            'inline' => $this->inline,
         ];
     }
 }

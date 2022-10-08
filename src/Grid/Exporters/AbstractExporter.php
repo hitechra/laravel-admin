@@ -31,8 +31,7 @@ abstract class AbstractExporter implements ExporterInterface
     /**
      * Set grid for exporter.
      *
-     * @param Grid $grid
-     *
+     * @param  Grid  $grid
      * @return $this
      */
     public function setGrid(Grid $grid)
@@ -55,8 +54,7 @@ abstract class AbstractExporter implements ExporterInterface
     /**
      * Get data with export query.
      *
-     * @param bool $toArray
-     *
+     * @param  bool  $toArray
      * @return array|\Illuminate\Support\Collection|mixed
      */
     public function getData($toArray = true)
@@ -65,9 +63,8 @@ abstract class AbstractExporter implements ExporterInterface
     }
 
     /**
-     * @param callable $callback
-     * @param int      $count
-     *
+     * @param  callable  $callback
+     * @param  int  $count
      * @return bool
      */
     public function chunk(callable $callback, $count = 100)
@@ -113,8 +110,7 @@ abstract class AbstractExporter implements ExporterInterface
     /**
      * Export data with scope.
      *
-     * @param string $scope
-     *
+     * @param  string  $scope
      * @return $this
      */
     public function withScope($scope)
@@ -123,7 +119,7 @@ abstract class AbstractExporter implements ExporterInterface
             return $this;
         }
 
-        list($scope, $args) = explode(':', $scope);
+        [$scope, $args] = explode(':', $scope);
 
         if ($scope == Grid\Exporter::SCOPE_CURRENT_PAGE) {
             $this->grid->model()->usePaginate(true);

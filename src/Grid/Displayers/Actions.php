@@ -46,7 +46,6 @@ class Actions extends AbstractDisplayer
      * Append a action.
      *
      * @param $action
-     *
      * @return $this
      */
     public function append($action)
@@ -60,7 +59,6 @@ class Actions extends AbstractDisplayer
      * Prepend a action.
      *
      * @param $action
-     *
      * @return $this
      */
     public function prepend($action)
@@ -144,7 +142,6 @@ class Actions extends AbstractDisplayer
      * Set resource of current resource.
      *
      * @param $resource
-     *
      * @return $this
      */
     public function setResource($resource)
@@ -237,8 +234,8 @@ EOT;
     {
         $trans = [
             'delete_confirm' => trans('admin.delete_confirm'),
-            'confirm'        => trans('admin.confirm'),
-            'cancel'         => trans('admin.cancel'),
+            'confirm' => trans('admin.confirm'),
+            'cancel' => trans('admin.cancel'),
         ];
 
         $trans = array_merge($trans, $this->trans);

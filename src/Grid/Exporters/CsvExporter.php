@@ -47,8 +47,7 @@ class CsvExporter extends AbstractExporter
     protected $columnUseOriginalValue;
 
     /**
-     * @param string $filename
-     *
+     * @param  string  $filename
      * @return $this
      */
     public function filename(string $filename = ''): self
@@ -59,7 +58,7 @@ class CsvExporter extends AbstractExporter
     }
 
     /**
-     * @param \Closure $closure
+     * @param  \Closure  $closure
      */
     public function setCallback(\Closure $closure): self
     {
@@ -69,8 +68,7 @@ class CsvExporter extends AbstractExporter
     }
 
     /**
-     * @param array $columns
-     *
+     * @param  array  $columns
      * @return $this
      */
     public function except(array $columns = []): self
@@ -81,8 +79,7 @@ class CsvExporter extends AbstractExporter
     }
 
     /**
-     * @param array $columns
-     *
+     * @param  array  $columns
      * @return $this
      */
     public function only(array $columns = []): self
@@ -93,8 +90,7 @@ class CsvExporter extends AbstractExporter
     }
 
     /**
-     * @param array $columns
-     *
+     * @param  array  $columns
      * @return $this
      */
     public function originalValue($columns = []): self
@@ -105,9 +101,8 @@ class CsvExporter extends AbstractExporter
     }
 
     /**
-     * @param string   $name
-     * @param \Closure $callback
-     *
+     * @param  string  $name
+     * @param  \Closure  $callback
      * @return $this
      */
     public function column(string $name, \Closure $callback): self
@@ -118,9 +113,8 @@ class CsvExporter extends AbstractExporter
     }
 
     /**
-     * @param string   $name
-     * @param \Closure $callback
-     *
+     * @param  string  $name
+     * @param  \Closure  $callback
      * @return $this
      */
     public function title(string $name, \Closure $callback): self
@@ -142,8 +136,8 @@ class CsvExporter extends AbstractExporter
         }
 
         return [
-            'Content-Encoding'    => 'UTF-8',
-            'Content-Type'        => 'text/csv;charset=UTF-8',
+            'Content-Encoding' => 'UTF-8',
+            'Content-Type' => 'text/csv;charset=UTF-8',
             'Content-Disposition' => "attachment;filename=\"{$this->filename}.csv\"",
         ];
     }
@@ -219,9 +213,8 @@ class CsvExporter extends AbstractExporter
     }
 
     /**
-     * @param array $value
-     * @param array $original
-     *
+     * @param  array  $value
+     * @param  array  $original
      * @return array
      */
     public function getVisiableFields(array $value, array $original): array
@@ -240,10 +233,9 @@ class CsvExporter extends AbstractExporter
     }
 
     /**
-     * @param string $column
-     * @param mixed  $value
-     * @param mixed  $original
-     *
+     * @param  string  $column
+     * @param  mixed  $value
+     * @param  mixed  $original
      * @return mixed
      */
     protected function getColumnValue(string $column, $value, $original)

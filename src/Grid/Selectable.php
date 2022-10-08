@@ -68,8 +68,7 @@ abstract class Selectable
     }
 
     /**
-     * @param bool $multiple
-     *
+     * @param  bool  $multiple
      * @return string
      */
     public function render()
@@ -156,9 +155,8 @@ BTN;
     }
 
     /**
-     * @param string $method
-     * @param array  $arguments
-     *
+     * @param  string  $method
+     * @param  array  $arguments
      * @return mixed
      */
     public function __call(string $method, array $arguments = [])

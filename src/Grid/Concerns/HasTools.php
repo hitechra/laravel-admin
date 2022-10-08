@@ -41,8 +41,7 @@ trait HasTools
     /**
      * Setup grid tools.
      *
-     * @param Closure $callback
-     *
+     * @param  Closure  $callback
      * @return void
      */
     public function tools(Closure $callback)

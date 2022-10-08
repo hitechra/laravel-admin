@@ -28,8 +28,7 @@ class DropdownActions extends Actions
     protected $defaultClass = [Edit::class, Show::class, Delete::class];
 
     /**
-     * @param RowAction $action
-     *
+     * @param  RowAction  $action
      * @return $this
      */
     public function add(RowAction $action)
@@ -57,7 +56,7 @@ class DropdownActions extends Actions
     }
 
     /**
-     * @param RowAction $action
+     * @param  RowAction  $action
      */
     protected function prepareAction(RowAction $action)
     {
@@ -69,8 +68,7 @@ class DropdownActions extends Actions
     /**
      * Disable view action.
      *
-     * @param bool $disable
-     *
+     * @param  bool  $disable
      * @return $this
      */
     public function disableView(bool $disable = true)
@@ -87,8 +85,7 @@ class DropdownActions extends Actions
     /**
      * Disable delete.
      *
-     * @param bool $disable
-     *
+     * @param  bool  $disable
      * @return $this.
      */
     public function disableDelete(bool $disable = true)
@@ -105,8 +102,7 @@ class DropdownActions extends Actions
     /**
      * Disable edit.
      *
-     * @param bool $disable
-     *
+     * @param  bool  $disable
      * @return $this
      */
     public function disableEdit(bool $disable = true)
@@ -121,8 +117,7 @@ class DropdownActions extends Actions
     }
 
     /**
-     * @param null|\Closure $callback
-     *
+     * @param  null|\Closure  $callback
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
     public function display($callback = null)
@@ -139,7 +134,7 @@ class DropdownActions extends Actions
 
         $variables = [
             'default' => $this->default,
-            'custom'  => $this->custom,
+            'custom' => $this->custom,
         ];
 
         if (empty($variables['default']) && empty($variables['custom'])) {

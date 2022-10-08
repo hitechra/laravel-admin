@@ -14,9 +14,8 @@ class Pjax
     /**
      * Handle an incoming request.
      *
-     * @param Request $request
-     * @param Closure $next
-     *
+     * @param  Request  $request
+     * @param  Closure  $next
      * @return Response
      */
     public function handle($request, Closure $next)
@@ -43,7 +42,7 @@ class Pjax
     /**
      * Send a response through this middleware.
      *
-     * @param Response $response
+     * @param  Response  $response
      */
     public static function respond(Response $response)
     {
@@ -59,8 +58,7 @@ class Pjax
     /**
      * Handle Response with exceptions.
      *
-     * @param Response $response
-     *
+     * @param  Response  $response
      * @return \Illuminate\Http\RedirectResponse
      */
     protected function handleErrorResponse(Response $response)
@@ -68,10 +66,10 @@ class Pjax
         $exception = $response->exception;
 
         $error = new MessageBag([
-            'type'    => get_class($exception),
+            'type' => get_class($exception),
             'message' => $exception->getMessage(),
-            'file'    => $exception->getFile(),
-            'line'    => $exception->getLine(),
+            'file' => $exception->getFile(),
+            'line' => $exception->getLine(),
         ]);
 
         return back()->withInput()->withErrors($error, 'exception');
@@ -80,9 +78,8 @@ class Pjax
     /**
      * Prepare the PJAX-specific response content.
      *
-     * @param Response $response
-     * @param string   $container
-     *
+     * @param  Response  $response
+     * @param  string  $container
      * @return $this
      */
     protected function filterResponse(Response $response, $container)
@@ -100,8 +97,7 @@ class Pjax
     /**
      * Prepare an HTML title tag.
      *
-     * @param Crawler $crawler
-     *
+     * @param  Crawler  $crawler
      * @return string
      */
     protected function makeTitle($crawler)
@@ -114,9 +110,8 @@ class Pjax
     /**
      * Fetch the PJAX-specific HTML from the response.
      *
-     * @param Crawler $crawler
-     * @param string  $container
-     *
+     * @param  Crawler  $crawler
+     * @param  string  $container
      * @return string
      */
     protected function fetchContents($crawler, $container)
@@ -133,8 +128,7 @@ class Pjax
     /**
      * Decode utf-8 characters to html entities.
      *
-     * @param string $html
-     *
+     * @param  string  $html
      * @return string
      */
     protected function decodeUtf8HtmlEntities($html)
@@ -147,8 +141,8 @@ class Pjax
     /**
      * Set the PJAX-URL header to the current uri.
      *
-     * @param Response $response
-     * @param Request  $request
+     * @param  Response  $response
+     * @param  Request  $request
      */
     protected function setUriHeader(Response $response, Request $request)
     {

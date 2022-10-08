@@ -17,8 +17,7 @@ class MenuController extends Controller
     /**
      * Index interface.
      *
-     * @param Content $content
-     *
+     * @param  Content  $content
      * @return Content
      */
     public function index(Content $content)
@@ -55,8 +54,7 @@ class MenuController extends Controller
     /**
      * Redirect to edit page.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function show($id)
@@ -97,9 +95,8 @@ class MenuController extends Controller
     /**
      * Edit interface.
      *
-     * @param string  $id
-     * @param Content $content
-     *
+     * @param  string  $id
+     * @param  Content  $content
      * @return Content
      */
     public function edit($id, Content $content)

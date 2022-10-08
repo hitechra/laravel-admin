@@ -74,7 +74,6 @@ LOGO;
 
     /**
      * @param (Command|string)[] $commands
-     *
      * @return int
      */
     private function getColumnWidth(array $commands)
@@ -94,8 +93,7 @@ LOGO;
     /**
      * Returns the length of a string, using mb_strwidth if it is available.
      *
-     * @param string $string The string to check its length
-     *
+     * @param  string  $string The string to check its length
      * @return int The length of the string
      */
     public static function strlen($string)

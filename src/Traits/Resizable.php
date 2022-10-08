@@ -9,9 +9,8 @@ trait Resizable
     /**
      * Method for returning specific thumbnail for model.
      *
-     * @param string $type
-     * @param string $attribute
-     *
+     * @param  string  $type
+     * @param  string  $attribute
      * @return string
      */
     public function thumbnail($type, $attribute = 'image')
@@ -34,7 +33,6 @@ trait Resizable
      *
      * @param $image
      * @param $type
-     *
      * @return string
      */
     public function getThumbnail($image, $type)

@@ -25,7 +25,7 @@ abstract class Interactor
     /**
      * Dialog constructor.
      *
-     * @param Action $action
+     * @param  Action  $action
      */
     public function __construct(Action $action)
     {

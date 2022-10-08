@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 class Scope implements Renderable
 {
     const QUERY_NAME = '_scope_';
+
     const SEPARATOR = '_separator_';
 
     /**
@@ -30,7 +31,7 @@ class Scope implements Renderable
      * Scope constructor.
      *
      * @param $key
-     * @param string $label
+     * @param  string  $label
      */
     public function __construct($key, $label = '')
     {
@@ -91,9 +92,8 @@ class Scope implements Renderable
     }
 
     /**
-     * @param string $method
-     * @param array  $arguments
-     *
+     * @param  string  $method
+     * @param  array  $arguments
      * @return $this
      */
     public function __call($method, $arguments)

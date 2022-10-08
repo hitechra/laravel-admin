@@ -10,12 +10,12 @@ class OperationLog extends Model
 {
     use DefaultDatetimeFormat;
 
-    protected $fillable = ['user_id', 'path', 'method', 'ip', 'input'];
+    protected $fillable = ['user_id', 'path', 'method', 'ip', 'input', 'agent', 'route_name', 'route_action'];
 
     public static $methodColors = [
-        'GET'    => 'green',
-        'POST'   => 'yellow',
-        'PUT'    => 'blue',
+        'GET' => 'green',
+        'POST' => 'yellow',
+        'PUT' => 'blue',
         'DELETE' => 'red',
     ];
 
@@ -27,7 +27,7 @@ class OperationLog extends Model
     /**
      * Create a new Eloquent model instance.
      *
-     * @param array $attributes
+     * @param  array  $attributes
      */
     public function __construct(array $attributes = [])
     {

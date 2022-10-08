@@ -19,7 +19,7 @@ abstract class Widget extends Fluent
     /**
      * Set view of widget.
      *
-     * @param string $view
+     * @param  string  $view
      */
     public function view($view)
     {
@@ -47,9 +47,8 @@ abstract class Widget extends Fluent
     /**
      * Build a single attribute element.
      *
-     * @param string $key
-     * @param string $value
-     *
+     * @param  string  $key
+     * @param  string  $value
      * @return string
      */
     protected function attributeElement($key, $value)

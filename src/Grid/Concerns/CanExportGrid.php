@@ -18,7 +18,7 @@ trait CanExportGrid
     /**
      * Handle export request.
      *
-     * @param bool $forceExport
+     * @param  bool  $forceExport
      */
     protected function handleExportRequest($forceExport = false)
     {
@@ -39,8 +39,7 @@ trait CanExportGrid
     }
 
     /**
-     * @param string $scope
-     *
+     * @param  string  $scope
      * @return AbstractExporter
      */
     protected function getExporter($scope)
@@ -52,7 +51,6 @@ trait CanExportGrid
      * Set exporter driver for Grid to export.
      *
      * @param $exporter
-     *
      * @return $this
      */
     public function exporter($exporter)
@@ -65,9 +63,8 @@ trait CanExportGrid
     /**
      * Get the export url.
      *
-     * @param int  $scope
-     * @param null $args
-     *
+     * @param  int  $scope
+     * @param  null  $args
      * @return string
      */
     public function getExportUrl($scope = 1, $args = null)
@@ -112,7 +109,7 @@ trait CanExportGrid
     }
 
     /**
-     * @param \Closure $callback
+     * @param  \Closure  $callback
      */
     public function export(\Closure $callback)
     {

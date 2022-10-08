@@ -10,9 +10,8 @@ trait ContainsForms
     protected $activeName = 'active';
 
     /**
-     * @param array $forms
-     * @param null  $active
-     *
+     * @param  array  $forms
+     * @param  null  $active
      * @return mixed
      */
     public static function forms($forms, $active = null)
@@ -23,9 +22,8 @@ trait ContainsForms
     }
 
     /**
-     * @param array $forms
-     * @param null  $active
-     *
+     * @param  array  $forms
+     * @param  null  $active
      * @return $this
      */
     protected function buildTabbedForms($forms, $active = null)
@@ -39,6 +37,7 @@ trait ContainsForms
         foreach ($forms as $name => $class) {
             if (!is_subclass_of($class, Form::class)) {
                 admin_error("Class [{$class}] must be a sub-class of [Hitechra\Admin\Widgets\Form].");
+
                 continue;
             }
 
@@ -56,8 +55,7 @@ trait ContainsForms
     }
 
     /**
-     * @param string $name
-     *
+     * @param  string  $name
      * @return string
      */
     protected function getTabUrl($name)

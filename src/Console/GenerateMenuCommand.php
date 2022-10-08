@@ -32,7 +32,7 @@ class GenerateMenuCommand extends Command
     /**
      * Create a new command instance.
      *
-     * @param Router $router
+     * @param  Router  $router
      */
     public function __construct(Router $router)
     {
@@ -75,9 +75,9 @@ class GenerateMenuCommand extends Command
         $news = $routes->diffKeys($menus)->map(function ($item, $key) {
             return [
                 'title' => $item,
-                'uri'   => $key,
+                'uri' => $key,
                 'order' => 10,
-                'icon'  => 'fa-list',
+                'icon' => 'fa-list',
             ];
         })->values()->toArray();
 

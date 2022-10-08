@@ -123,8 +123,7 @@ abstract class Action implements Renderable
     }
 
     /**
-     * @param string $prefix
-     *
+     * @param  string  $prefix
      * @return mixed|string
      */
     public function selector($prefix)
@@ -137,9 +136,8 @@ abstract class Action implements Renderable
     }
 
     /**
-     * @param string $class
-     * @param string $prefix
-     *
+     * @param  string  $class
+     * @param  string  $prefix
      * @return string
      */
     public static function makeSelector($class, $prefix)
@@ -152,9 +150,8 @@ abstract class Action implements Renderable
     }
 
     /**
-     * @param string $name
-     * @param string $value
-     *
+     * @param  string  $name
+     * @param  string  $value
      * @return $this
      */
     public function attribute($name, $value)
@@ -247,8 +244,7 @@ abstract class Action implements Renderable
     }
 
     /**
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return $this
      */
     public function validate(Request $request)
@@ -395,12 +391,11 @@ SCRIPT;
     }
 
     /**
-     * @param string $method
-     * @param array  $arguments
+     * @param  string  $method
+     * @param  array  $arguments
+     * @return mixed
      *
      * @throws \Exception
-     *
-     * @return mixed
      */
     public function __call($method, $arguments = [])
     {

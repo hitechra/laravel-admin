@@ -21,8 +21,7 @@ abstract class BatchAction extends GridAction
     /**
      * add a single CSS class string to the CSS-Classes array.
      *
-     * @param string $cssClass
-     *
+     * @param  string  $cssClass
      * @return $this
      */
     public function addCssClass(string $cssClass)
@@ -41,8 +40,7 @@ abstract class BatchAction extends GridAction
     /**
      * add multiple CSS class strings to the CSS-Classes array.
      *
-     * @param array $cssClasses
-     *
+     * @param  array  $cssClasses
      * @return $this
      */
     public function addCssClasses(array $cssClasses)
@@ -83,8 +81,7 @@ SCRIPT;
     }
 
     /**
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return mixed
      */
     public function retrieveModel(Request $request)

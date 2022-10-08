@@ -17,7 +17,7 @@ class Header extends AbstractTool
     /**
      * Header constructor.
      *
-     * @param Grid $grid
+     * @param  Grid  $grid
      */
     public function __construct(Grid $grid)
     {

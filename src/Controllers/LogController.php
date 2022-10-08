@@ -34,6 +34,10 @@ class LogController extends AdminController
         });
         $grid->column('path')->label('info');
         $grid->column('ip')->label('primary');
+        $grid->column('agent')
+            ->limit(20);
+        $grid->column('route_name');
+        $grid->column('route_action');
         $grid->column('input')->display(function ($input) {
             $input = json_decode($input, true);
             $input = Arr::except($input, ['_pjax', '_token', '_method', '_previous_']);
@@ -59,15 +63,16 @@ class LogController extends AdminController
             $filter->equal('user_id', 'User')->select($userModel::all()->pluck('name', 'id'));
             $filter->equal('method')->select(array_combine(OperationLog::$methods, OperationLog::$methods));
             $filter->like('path');
-            $filter->equal('ip');
+            $filter->equal('route_name');
         });
+
+        $grid->useSimplePagination();
 
         return $grid;
     }
 
     /**
-     * @param mixed $id
-     *
+     * @param  mixed  $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
@@ -76,12 +81,12 @@ class LogController extends AdminController
 
         if (OperationLog::destroy(array_filter($ids))) {
             $data = [
-                'status'  => true,
+                'status' => true,
                 'message' => trans('admin.delete_succeeded'),
             ];
         } else {
             $data = [
-                'status'  => false,
+                'status' => false,
                 'message' => trans('admin.delete_failed'),
             ];
         }

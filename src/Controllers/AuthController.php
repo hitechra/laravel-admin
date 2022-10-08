@@ -36,8 +36,7 @@ class AuthController extends Controller
     /**
      * Handle a login request.
      *
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return mixed
      */
     public function postLogin(Request $request)
@@ -59,8 +58,7 @@ class AuthController extends Controller
     /**
      * Get a validator for an incoming login request.
      *
-     * @param array $data
-     *
+     * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function loginValidator(array $data)
@@ -88,8 +86,7 @@ class AuthController extends Controller
     /**
      * User setting page.
      *
-     * @param Content $content
-     *
+     * @param  Content  $content
      * @return Content
      */
     public function getSetting(Content $content)
@@ -132,7 +129,9 @@ class AuthController extends Controller
         $userTable = config('admin.database.users_table');
         $connection = config('admin.database.connection');
 
-        $form->display('username', trans('admin.username'));
+        $form->text('username', trans('admin.username'))
+            ->creationRules(['required', "unique:{$connection}.{$userTable}"])
+            ->updateRules(['required', "unique:{$connection}.{$userTable},username,{{id}}"]);
 
         $form->text('email', trans('Email'))
             ->creationRules(['required', "unique:{$connection}.{$userTable}"])
@@ -141,19 +140,26 @@ class AuthController extends Controller
         $form->text('name', trans('admin.name'))->rules('required');
         $form->image('avatar', trans('admin.avatar'));
 
-        $form->password('password', trans('admin.password'))
+        $form->password('new_password', trans('admin.password'))
             ->help(__('Leave it empty, if you don\'t want to change the password'))
             ->rules('confirmed|nullable');
-        $form->password('password_confirmation', trans('admin.password_confirmation'))->rules('nullable');
+        $form->password('new_password_confirmation', trans('admin.password_confirmation'))->rules('nullable');
+        $form->hidden('password');
 
         $form->setAction(admin_url('auth/setting'));
 
-        $form->ignore(['password_confirmation']);
+        $form->ignore(['new_password_confirmation']);
 
-        $form->saving(function (Form $form) {
-            if ($form->password && $form->model()->password != $form->password) {
-                $form->password = Hash::make($form->password);
+        $form->submitted(function (Form $form) {
+            if (empty($form->new_password)) {
+                $form->ignore('new_password');
+                $form->ignore('password');
+
+                return;
             }
+
+            $form->password = Hash::make($form->new_password);
+            $form->ignore('new_password');
         });
 
         $form->saved(function () {
@@ -194,8 +200,7 @@ class AuthController extends Controller
     /**
      * Send the response after the user was authenticated.
      *
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     protected function sendLoginResponse(Request $request)

@@ -15,8 +15,8 @@ class ResourceGenerator
      * @var array
      */
     protected $formats = [
-        'form_field'  => "\$form->%s('%s', __('%s'))",
-        'show_field'  => "\$show->field('%s', __('%s'))",
+        'form_field' => "\$form->%s('%s', __('%s'))",
+        'show_field' => "\$show->field('%s', __('%s'))",
         'grid_column' => "\$grid->column('%s', __('%s'))",
     ];
 
@@ -35,20 +35,20 @@ class ResourceGenerator
      * @var array
      */
     protected $fieldTypeMapping = [
-        'ip'       => 'ip',
-        'email'    => 'email|mail',
+        'ip' => 'ip',
+        'email' => 'email|mail',
         'password' => 'password|pwd',
-        'url'      => 'url|link|src|href',
-        'mobile'   => 'mobile|phone',
-        'color'    => 'color|rgb',
-        'image'    => 'image|img|avatar|pic|picture|cover',
-        'file'     => 'file|attachment',
+        'url' => 'url|link|src|href',
+        'mobile' => 'mobile|phone',
+        'color' => 'color|rgb',
+        'image' => 'image|img|avatar|pic|picture|cover',
+        'file' => 'file|attachment',
     ];
 
     /**
      * ResourceGenerator constructor.
      *
-     * @param mixed $model
+     * @param  mixed  $model
      */
     public function __construct($model)
     {
@@ -56,8 +56,7 @@ class ResourceGenerator
     }
 
     /**
-     * @param mixed $model
-     *
+     * @param  mixed  $model
      * @return mixed
      */
     protected function getModel($model)
@@ -207,9 +206,9 @@ class ResourceGenerator
     /**
      * Get columns of a giving model.
      *
-     * @throws \Exception
-     *
      * @return \Doctrine\DBAL\Schema\Column[]
+     *
+     * @throws \Exception
      */
     protected function getTableColumns()
     {
@@ -234,7 +233,7 @@ class ResourceGenerator
 
         $database = null;
         if (strpos($table, '.')) {
-            list($database, $table) = explode('.', $table);
+            [$database, $table] = explode('.', $table);
         }
 
         return $schema->listTableColumns($table, $database);
@@ -243,8 +242,7 @@ class ResourceGenerator
     /**
      * Format label.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return string
      */
     protected function formatLabel($value)

@@ -12,24 +12,24 @@ class LogOperation
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
-     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
      * @return mixed
      */
     public function handle(Request $request, \Closure $next)
     {
         if ($this->shouldLogOperation($request)) {
-            $log = [
-                'user_id' => Admin::user()->id,
-                'path'    => substr($request->path(), 0, 255),
-                'method'  => $request->method(),
-                'ip'      => $request->getClientIp(),
-                'input'   => json_encode($request->input()),
-            ];
-
             try {
-                OperationLogModel::create($log);
+                OperationLogModel::create([
+                    'user_id' => Admin::user()->id,
+                    'path' => substr($request->path(), 0, 255),
+                    'method' => $request->method(),
+                    'ip' => $request->getClientIp(),
+                    'input' => json_encode($request->input()),
+                    'agent' => request()->userAgent(),
+                    'route_name' => request()->route()->getName(),
+                    'route_action' => request()->route()->getActionName(),
+                ]);
             } catch (\Exception $exception) {
                 // pass
             }
@@ -39,8 +39,7 @@ class LogOperation
     }
 
     /**
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return bool
      */
     protected function shouldLogOperation(Request $request)
@@ -54,8 +53,7 @@ class LogOperation
     /**
      * Whether requests using this method are allowed to be logged.
      *
-     * @param string $method
-     *
+     * @param  string  $method
      * @return bool
      */
     protected function inAllowedMethods($method)
@@ -74,8 +72,7 @@ class LogOperation
     /**
      * Determine if the request has a URI that should pass through CSRF verification.
      *
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return bool
      */
     protected function inExceptArray($request)
@@ -88,14 +85,16 @@ class LogOperation
             $methods = [];
 
             if (Str::contains($except, ':')) {
-                list($methods, $except) = explode(':', $except);
+                [$methods, $except] = explode(':', $except);
                 $methods = explode(',', $methods);
             }
 
             $methods = array_map('strtoupper', $methods);
 
-            if ($request->is($except) &&
-                (empty($methods) || in_array($request->method(), $methods))) {
+            if (
+                $request->is($except) &&
+                (empty($methods) || in_array($request->method(), $methods))
+            ) {
                 return true;
             }
         }

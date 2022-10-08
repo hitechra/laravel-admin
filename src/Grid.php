@@ -37,8 +37,8 @@ class Grid
         Concerns\CanDoubleClick,
         ShouldSnakeAttributes,
         Macroable {
-        __call as macroCall;
-    }
+            __call as macroCall;
+        }
 
     /**
      * The grid data model instance.
@@ -142,16 +142,16 @@ class Grid
      * @var array
      */
     protected $options = [
-        'show_pagination'        => true,
-        'show_tools'             => true,
-        'show_filter'            => true,
-        'show_exporter'          => true,
-        'show_actions'           => true,
-        'show_row_selector'      => true,
-        'show_create_btn'        => true,
-        'show_column_selector'   => true,
+        'show_pagination' => true,
+        'show_tools' => true,
+        'show_filter' => true,
+        'show_exporter' => true,
+        'show_actions' => true,
+        'show_row_selector' => true,
+        'show_create_btn' => true,
+        'show_column_selector' => true,
         'show_define_empty_page' => true,
-        'show_perpage_selector'  => true,
+        'show_perpage_selector' => true,
     ];
 
     /**
@@ -169,8 +169,8 @@ class Grid
     /**
      * Create a new grid instance.
      *
-     * @param Eloquent $model
-     * @param Closure  $builder
+     * @param  Eloquent  $model
+     * @param  Closure  $builder
      */
     public function __construct(Eloquent $model, Closure $builder = null)
     {
@@ -200,7 +200,7 @@ class Grid
     /**
      * Initialize with user pre-defined default disables and exporter, etc.
      *
-     * @param Closure $callback
+     * @param  Closure  $callback
      */
     public static function init(Closure $callback = null)
     {
@@ -224,9 +224,8 @@ class Grid
     /**
      * Get or set option for grid.
      *
-     * @param string $key
-     * @param mixed  $value
-     *
+     * @param  string  $key
+     * @param  mixed  $value
      * @return $this|mixed
      */
     public function option($key, $value = null)
@@ -253,9 +252,8 @@ class Grid
     /**
      * Add a column to Grid.
      *
-     * @param string $name
-     * @param string $label
-     *
+     * @param  string  $name
+     * @param  string  $label
      * @return Column
      */
     public function column($name, $label = '')
@@ -278,8 +276,7 @@ class Grid
      * 1.$grid->columns(['name' => 'Name', 'email' => 'Email' ...]);
      * 2.$grid->columns('name', 'email' ...)
      *
-     * @param array $columns
-     *
+     * @param  array  $columns
      * @return Collection|null
      */
     public function columns($columns = [])
@@ -304,9 +301,8 @@ class Grid
     /**
      * Add column to grid.
      *
-     * @param string $column
-     * @param string $label
-     *
+     * @param  string  $column
+     * @param  string  $label
      * @return Column
      */
     protected function addColumn($column = '', $label = '')
@@ -332,14 +328,13 @@ class Grid
     /**
      * Add a relation column to grid.
      *
-     * @param string $name
-     * @param string $label
-     *
+     * @param  string  $name
+     * @param  string  $label
      * @return $this|bool|Column
      */
     protected function addRelationColumn($name, $label = '')
     {
-        list($relation, $column) = explode('.', $name);
+        [$relation, $column] = explode('.', $name);
 
         $model = $this->model()->eloquent();
 
@@ -351,7 +346,7 @@ class Grid
             return $this;
         }
 
-        $name = ($this->shouldSnakeAttributes() ? Str::snake($relation) : $relation) . '.' . $column;
+        $name = ($this->shouldSnakeAttributes() ? Str::snake($relation) : $relation).'.'.$column;
 
         $this->model()->with($relation);
 
@@ -361,9 +356,8 @@ class Grid
     /**
      * Add a json type column to grid.
      *
-     * @param string $name
-     * @param string $label
-     *
+     * @param  string  $name
+     * @param  string  $label
      * @return Column
      */
     protected function addJsonColumn($name, $label = '')
@@ -378,9 +372,8 @@ class Grid
     /**
      * Prepend column to grid.
      *
-     * @param string $column
-     * @param string $label
-     *
+     * @param  string  $column
+     * @param  string  $label
      * @return Column
      */
     public function prependColumn($column = '', $label = '')
@@ -406,8 +399,7 @@ class Grid
     /**
      * Paginate the grid.
      *
-     * @param int $perPage
-     *
+     * @param  int  $perPage
      * @return $this
      */
     public function paginate($perPage = 20)
@@ -466,7 +458,7 @@ class Grid
     /**
      * Set per-page options.
      *
-     * @param array $perPages
+     * @param  array  $perPages
      */
     public function perPages(array $perPages)
     {
@@ -474,8 +466,7 @@ class Grid
     }
 
     /**
-     * @param bool $disable
-     *
+     * @param  bool  $disable
      * @return $this
      */
     public function disablePerPageSelector(bool $disable = true)
@@ -592,9 +583,8 @@ class Grid
     /**
      * Build the grid rows.
      *
-     * @param array      $data
-     * @param Collection $collection
-     *
+     * @param  array  $data
+     * @param  Collection  $collection
      * @return void
      */
     protected function buildRows(array $data, Collection $collection)
@@ -611,8 +601,7 @@ class Grid
     /**
      * Set grid row callback function.
      *
-     * @param Closure $callable
-     *
+     * @param  Closure  $callable
      * @return Collection|null
      */
     public function rows(Closure $callable = null)
@@ -640,7 +629,7 @@ class Grid
         return sprintf(
             '%s/create%s',
             $this->resource(),
-            $queryString ? ('?' . $queryString) : ''
+            $queryString ? ('?'.$queryString) : ''
         );
     }
 
@@ -709,8 +698,7 @@ class Grid
     /**
      * Get current resource url.
      *
-     * @param string $path
-     *
+     * @param  string  $path
      * @return string
      */
     public function resource($path = null)
@@ -731,9 +719,8 @@ class Grid
     /**
      * Handle get mutator column for grid.
      *
-     * @param string $method
-     * @param string $label
-     *
+     * @param  string  $method
+     * @param  string  $label
      * @return bool|Column
      */
     protected function handleGetMutatorColumn($method, $label)
@@ -748,9 +735,8 @@ class Grid
     /**
      * Handle relation column for grid.
      *
-     * @param string $method
-     * @param string $label
-     *
+     * @param  string  $method
+     * @param  string  $label
      * @return bool|Column
      */
     protected function handleRelationColumn($method, $label)
@@ -796,7 +782,6 @@ class Grid
      *
      * @param $method
      * @param $arguments
-     *
      * @return Column
      */
     public function __call($method, $arguments)
@@ -825,8 +810,7 @@ class Grid
     /**
      * Add variables to grid view.
      *
-     * @param array $variables
-     *
+     * @param  array  $variables
      * @return $this
      */
     public function with($variables = [])
@@ -851,8 +835,8 @@ class Grid
     /**
      * Set a view to render.
      *
-     * @param string $view
-     * @param array  $variables
+     * @param  string  $view
+     * @param  array  $variables
      */
     public function setView($view, $variables = [])
     {
@@ -866,8 +850,7 @@ class Grid
     /**
      * Set grid title.
      *
-     * @param string $title
-     *
+     * @param  string  $title
      * @return $this
      */
     public function setTitle($title)
@@ -880,8 +863,7 @@ class Grid
     /**
      * Set relation for grid.
      *
-     * @param Relations\Relation $relation
-     *
+     * @param  Relations\Relation  $relation
      * @return $this
      */
     public function setRelation(Relations\Relation $relation)
@@ -894,8 +876,7 @@ class Grid
     /**
      * Set resource path for grid.
      *
-     * @param string $path
-     *
+     * @param  string  $path
      * @return $this
      */
     public function setResource($path)
@@ -908,8 +889,7 @@ class Grid
     /**
      * Set rendering callback.
      *
-     * @param callable $callback
-     *
+     * @param  callable  $callback
      * @return $this
      */
     public function rendering(callable $callback)

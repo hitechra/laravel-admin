@@ -13,11 +13,10 @@ class ChainSelect extends FieldSelect
     /**
      * Load options for other select on change.
      *
-     * @param string $field
-     * @param string $sourceUrl
-     * @param string $idField
-     * @param string $textField
-     *
+     * @param  string  $field
+     * @param  string  $sourceUrl
+     * @param  string  $idField
+     * @param  string  $textField
      * @return $this
      */
     public function load($field, $sourceUrl, $idField = 'id', $textField = 'text', bool $allowClear = true)
@@ -30,7 +29,7 @@ class ChainSelect extends FieldSelect
         }
 
         $placeholder = json_encode([
-            'id'   => '',
+            'id' => '',
             'text' => trans('admin.choose'),
         ]);
 

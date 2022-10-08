@@ -74,8 +74,7 @@ class Admin
 
     /**
      * @param $model
-     * @param Closure $callable
-     *
+     * @param  Closure  $callable
      * @return \Hitechra\Admin\Grid
      *
      * @deprecated since v1.6.1
@@ -87,8 +86,7 @@ class Admin
 
     /**
      * @param $model
-     * @param Closure $callable
-     *
+     * @param  Closure  $callable
      * @return \Hitechra\Admin\Form
      *
      *  @deprecated since v1.6.1
@@ -102,8 +100,7 @@ class Admin
      * Build a tree.
      *
      * @param $model
-     * @param Closure|null $callable
-     *
+     * @param  Closure|null  $callable
      * @return \Hitechra\Admin\Tree
      */
     public function tree($model, Closure $callable = null)
@@ -115,8 +112,7 @@ class Admin
      * Build show page.
      *
      * @param $model
-     * @param mixed $callable
-     *
+     * @param  mixed  $callable
      * @return Show
      *
      * @deprecated since v1.6.1
@@ -127,8 +123,7 @@ class Admin
     }
 
     /**
-     * @param Closure $callable
-     *
+     * @param  Closure  $callable
      * @return \Hitechra\Admin\Layout\Content
      *
      * @deprecated since v1.6.1
@@ -140,7 +135,6 @@ class Admin
 
     /**
      * @param $model
-     *
      * @return mixed
      */
     public function getModel($model)
@@ -176,8 +170,7 @@ class Admin
     }
 
     /**
-     * @param array $menu
-     *
+     * @param  array  $menu
      * @return array
      */
     public function menuLinks($menu = [])
@@ -202,8 +195,7 @@ class Admin
     /**
      * Set admin title.
      *
-     * @param string $title
-     *
+     * @param  string  $title
      * @return void
      */
     public static function setTitle($title)
@@ -222,8 +214,7 @@ class Admin
     }
 
     /**
-     * @param null|string $favicon
-     *
+     * @param  null|string  $favicon
      * @return string|void
      */
     public function favicon($favicon = null)
@@ -260,8 +251,7 @@ class Admin
     /**
      * Set navbar.
      *
-     * @param Closure|null $builder
-     *
+     * @param  Closure|null  $builder
      * @return Navbar
      */
     public function navbar(Closure $builder = null)
@@ -307,15 +297,13 @@ class Admin
     public function routes()
     {
         $attributes = [
-            'prefix'     => config('admin.route.prefix'),
+            'prefix' => config('admin.route.prefix'),
             'middleware' => config('admin.route.middleware'),
         ];
 
         app('router')->group($attributes, function ($router) {
-
             /* @var \Illuminate\Support\Facades\Route $router */
             $router->namespace('\Hitechra\Admin\Controllers')->group(function ($router) {
-
                 /* @var \Illuminate\Routing\Router $router */
                 $router->resource('auth/users', 'UserController')->names('admin.auth.users');
                 $router->resource('auth/roles', 'RoleController')->names('admin.auth.roles');
@@ -343,9 +331,8 @@ class Admin
     /**
      * Extend a extension.
      *
-     * @param string $name
-     * @param string $class
-     *
+     * @param  string  $name
+     * @param  string  $class
      * @return void
      */
     public static function extend($name, $class)
@@ -354,7 +341,7 @@ class Admin
     }
 
     /**
-     * @param callable $callback
+     * @param  callable  $callback
      */
     public static function booting(callable $callback)
     {
@@ -362,7 +349,7 @@ class Admin
     }
 
     /**
-     * @param callable $callback
+     * @param  callable  $callback
      */
     public static function booted(callable $callback)
     {

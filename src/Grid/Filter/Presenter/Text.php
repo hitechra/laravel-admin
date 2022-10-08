@@ -24,7 +24,7 @@ class Text extends Presenter
     /**
      * Text constructor.
      *
-     * @param string $placeholder
+     * @param  string  $placeholder
      */
     public function __construct($placeholder = '')
     {
@@ -40,17 +40,16 @@ class Text extends Presenter
     {
         return [
             'placeholder' => $this->placeholder,
-            'icon'        => $this->icon,
-            'type'        => $this->type,
-            'group'       => $this->filter->group,
+            'icon' => $this->icon,
+            'type' => $this->type,
+            'group' => $this->filter->group,
         ];
     }
 
     /**
      * Set input placeholder.
      *
-     * @param string $placeholder
-     *
+     * @param  string  $placeholder
      * @return $this
      */
     public function placeholder($placeholder = ''): self
@@ -85,7 +84,7 @@ class Text extends Presenter
     }
 
     /**
-     * @param array $options
+     * @param  array  $options
      *
      * @see https://github.com/RobinHerbots/Inputmask/blob/4.x/README_numeric.md
      *
@@ -97,7 +96,7 @@ class Text extends Presenter
     }
 
     /**
-     * @param array $options
+     * @param  array  $options
      *
      * @see https://github.com/RobinHerbots/Inputmask/blob/4.x/README_numeric.md
      *
@@ -106,14 +105,14 @@ class Text extends Presenter
     public function currency($options = []): self
     {
         return $this->inputmask(array_merge($options, [
-            'alias'              => 'currency',
-            'prefix'             => '',
+            'alias' => 'currency',
+            'prefix' => '',
             'removeMaskOnSubmit' => true,
         ]));
     }
 
     /**
-     * @param array $options
+     * @param  array  $options
      *
      * @see https://github.com/RobinHerbots/Inputmask/blob/4.x/README_numeric.md
      *
@@ -143,8 +142,7 @@ class Text extends Presenter
     }
 
     /**
-     * @param string $mask
-     *
+     * @param  string  $mask
      * @return Text
      */
     public function mobile($mask = '19999999999'): self
@@ -153,9 +151,8 @@ class Text extends Presenter
     }
 
     /**
-     * @param array  $options
-     * @param string $icon
-     *
+     * @param  array  $options
+     * @param  string  $icon
      * @return $this
      */
     public function inputmask($options = [], $icon = 'pencil'): self

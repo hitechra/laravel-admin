@@ -26,5 +26,5 @@
 </style>
 
 <div class="title">
-    Laravel-admin
+    Hitechra Admin
 </div>

@@ -140,10 +140,10 @@ TREE;
 
         // copy files
         $this->copy([
-            __DIR__.'/stubs/extension/view.stub'       => 'resources/views/index.blade.php',
+            __DIR__.'/stubs/extension/view.stub' => 'resources/views/index.blade.php',
             __DIR__.'/stubs/extension/.gitignore.stub' => '.gitignore',
-            __DIR__.'/stubs/extension/README.md.stub'  => 'README.md',
-            __DIR__.'/stubs/extension/LICENSE.stub'    => 'LICENSE',
+            __DIR__.'/stubs/extension/README.md.stub' => 'README.md',
+            __DIR__.'/stubs/extension/LICENSE.stub' => 'LICENSE',
         ]);
 
         // make composer.json
@@ -195,7 +195,7 @@ TREE;
     protected function getRootNameSpace()
     {
         if (!$namespace = $this->option('namespace')) {
-            list($vendor, $name) = explode('/', $this->package);
+            [$vendor, $name] = explode('/', $this->package);
 
             $default = str_replace(['-', '-'], '', Str::title($vendor).'\\'.Str::title($name));
 
@@ -228,8 +228,7 @@ TREE;
     /**
      * Validate extension name.
      *
-     * @param string $name
-     *
+     * @param  string  $name
      * @return int
      */
     protected function validateExtensionName($name)
@@ -240,8 +239,7 @@ TREE;
     /**
      * Extension path.
      *
-     * @param string $path
-     *
+     * @param  string  $path
      * @return string
      */
     protected function extensionPath($path = '')
@@ -258,8 +256,8 @@ TREE;
     /**
      * Put contents to file.
      *
-     * @param string $to
-     * @param string $content
+     * @param  string  $to
+     * @param  string  $content
      */
     protected function putFile($to, $content)
     {
@@ -271,8 +269,8 @@ TREE;
     /**
      * Copy files to extension path.
      *
-     * @param string|array $from
-     * @param string|null  $to
+     * @param  string|array  $from
+     * @param  string|null  $to
      */
     protected function copy($from, $to = null)
     {
@@ -296,7 +294,7 @@ TREE;
     /**
      * Make new directory.
      *
-     * @param array|string $paths
+     * @param  array|string  $paths
      */
     protected function makeDir($paths = '')
     {

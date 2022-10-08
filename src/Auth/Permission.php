@@ -11,7 +11,6 @@ class Permission
      * Check permission.
      *
      * @param $permission
-     *
      * @return true
      */
     public static function check($permission)
@@ -37,7 +36,6 @@ class Permission
      * Roles allowed to access.
      *
      * @param $roles
-     *
      * @return true
      */
     public static function allow($roles)
@@ -65,7 +63,6 @@ class Permission
      * Roles denied to access.
      *
      * @param $roles
-     *
      * @return true
      */
     public static function deny($roles)

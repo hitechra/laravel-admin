@@ -40,9 +40,9 @@ class FixColumns
     /**
      * FixColumns constructor.
      *
-     * @param Grid $grid
-     * @param int  $head
-     * @param int  $tail
+     * @param  Grid  $grid
+     * @param  int  $head
+     * @param  int  $tail
      */
     public function __construct(Grid $grid, $head, $tail = -1)
     {

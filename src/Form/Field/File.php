@@ -33,8 +33,8 @@ class File extends Field
     /**
      * Create a new File instance.
      *
-     * @param string $column
-     * @param array  $arguments
+     * @param  string  $column
+     * @param  array  $arguments
      */
     public function __construct($column, $arguments = [])
     {
@@ -96,8 +96,7 @@ class File extends Field
     /**
      * Prepare for saving.
      *
-     * @param UploadedFile|array $file
-     *
+     * @param  UploadedFile|array  $file
      * @return mixed|string
      */
     public function prepare($file)
@@ -118,8 +117,7 @@ class File extends Field
     /**
      * Upload file and delete original file.
      *
-     * @param UploadedFile $file
-     *
+     * @param  UploadedFile  $file
      * @return mixed
      */
     protected function uploadAndDeleteOriginal(UploadedFile $file)
@@ -164,8 +162,7 @@ class File extends Field
     /**
      * Initialize the caption.
      *
-     * @param string $caption
-     *
+     * @param  string  $caption
      * @return string
      */
     protected function initialCaption($caption)
@@ -186,7 +183,7 @@ class File extends Field
     }
 
     /**
-     * @param string $options
+     * @param  string  $options
      */
     protected function setupScripts($options)
     {
@@ -196,9 +193,9 @@ EOT;
 
         if ($this->fileActionSettings['showRemove']) {
             $text = [
-                'title'   => trans('admin.delete_confirm'),
+                'title' => trans('admin.delete_confirm'),
                 'confirm' => trans('admin.confirm'),
-                'cancel'  => trans('admin.cancel'),
+                'cancel' => trans('admin.cancel'),
             ];
 
             $this->script .= <<<EOT

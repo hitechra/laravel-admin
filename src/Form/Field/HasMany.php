@@ -54,8 +54,8 @@ class HasMany extends Field
      */
     protected $views = [
         'default' => 'admin::form.hasmany',
-        'tab'     => 'admin::form.hasmanytab',
-        'table'   => 'admin::form.hasmanytable',
+        'tab' => 'admin::form.hasmanytab',
+        'table' => 'admin::form.hasmanytable',
     ];
 
     /**
@@ -84,7 +84,7 @@ class HasMany extends Field
      * Create a new HasMany field instance.
      *
      * @param $relationName
-     * @param array $arguments
+     * @param  array  $arguments
      */
     public function __construct($relationName, $arguments = [])
     {
@@ -98,15 +98,14 @@ class HasMany extends Field
         }
 
         if (count($arguments) == 2) {
-            list($this->label, $this->builder) = $arguments;
+            [$this->label, $this->builder] = $arguments;
         }
     }
 
     /**
      * Get validator for this field.
      *
-     * @param array $input
-     *
+     * @param  array  $input
      * @return bool|\Illuminate\Contracts\Validation\Validator
      */
     public function getValidator(array $input)
@@ -138,7 +137,7 @@ class HasMany extends Field
 
             if (is_array($column)) {
                 foreach ($column as $key => $name) {
-                    $rules[$name . $key] = $fieldRules;
+                    $rules[$name.$key] = $fieldRules;
                 }
 
                 $this->resetInputKey($input, $column);
@@ -187,8 +186,7 @@ class HasMany extends Field
     /**
      * Set distinct fields.
      *
-     * @param array $fields
-     *
+     * @param  array  $fields
      * @return $this
      */
     public function distinctFields(array $fields)
@@ -201,7 +199,7 @@ class HasMany extends Field
     /**
      * Append distinct rules.
      *
-     * @param array $rules
+     * @param  array  $rules
      */
     protected function appendDistinctRules(array &$rules)
     {
@@ -213,10 +211,9 @@ class HasMany extends Field
     /**
      * Format validation attributes.
      *
-     * @param array  $input
-     * @param string $label
-     * @param string $column
-     *
+     * @param  array  $input
+     * @param  string  $label
+     * @param  string  $column
      * @return array
      */
     protected function formatValidationAttribute($input, $label, $column)
@@ -225,7 +222,7 @@ class HasMany extends Field
 
         if (is_array($column)) {
             foreach ($column as $index => $col) {
-                $new[$col . $index] = $col;
+                $new[$col.$index] = $col;
             }
         }
 
@@ -237,7 +234,7 @@ class HasMany extends Field
             } else {
                 foreach ($new as $k => $val) {
                     if (Str::endsWith($key, ".$k")) {
-                        $attributes[$key] = $label . "[$val]";
+                        $attributes[$key] = $label."[$val]";
                     }
                 }
             }
@@ -249,9 +246,8 @@ class HasMany extends Field
     /**
      * Reset input key for validation.
      *
-     * @param array $input
-     * @param array $column $column is the column name array set
-     *
+     * @param  array  $input
+     * @param  array  $column $column is the column name array set
      * @return void.
      */
     protected function resetInputKey(array &$input, array $column)
@@ -277,7 +273,6 @@ class HasMany extends Field
          * in the HasMany relation, has many data/field set, $set is field set in the below
          */
         foreach ($input[$this->column] as $index => $set) {
-
             /*
              * foreach the field set to find the corresponding $column
              */
@@ -296,7 +291,7 @@ class HasMany extends Field
                  *
                  * I don't know why a form need range input? Only can imagine is for range search....
                  */
-                $newKey = $name . $column[$name];
+                $newKey = $name.$column[$name];
 
                 /*
                  * set new key
@@ -313,8 +308,7 @@ class HasMany extends Field
     /**
      * Prepare input data for insert or update.
      *
-     * @param array $input
-     *
+     * @param  array  $input
      * @return array
      */
     public function prepare($input)
@@ -327,10 +321,9 @@ class HasMany extends Field
     /**
      * Build a Nested form.
      *
-     * @param string   $column
-     * @param \Closure $builder
-     * @param null     $model
-     *
+     * @param  string  $column
+     * @param  \Closure  $builder
+     * @param  null  $model
      * @return NestedForm
      */
     protected function buildNestedForm($column, \Closure $builder, $model = null)
@@ -369,8 +362,7 @@ class HasMany extends Field
     /**
      * Set view mode.
      *
-     * @param string $mode currently support `tab` mode.
-     *
+     * @param  string  $mode currently support `tab` mode.
      * @return $this
      *
      * @author Edwin Hui
@@ -405,9 +397,9 @@ class HasMany extends Field
     /**
      * Build Nested form for related data.
      *
-     * @throws \Exception
-     *
      * @return array
+     *
+     * @throws \Exception
      */
     protected function buildRelatedForms()
     {
@@ -464,13 +456,12 @@ class HasMany extends Field
     /**
      * Setup script for this field in different view mode.
      *
-     * @param string $script
-     *
+     * @param  string  $script
      * @return void
      */
     protected function setupScript($script)
     {
-        $method = 'setupScriptFor' . ucfirst($this->viewMode) . 'View';
+        $method = 'setupScriptFor'.ucfirst($this->viewMode).'View';
 
         call_user_func([$this, $method], $script);
     }
@@ -478,8 +469,7 @@ class HasMany extends Field
     /**
      * Setup default template script.
      *
-     * @param string $templateScript
-     *
+     * @param  string  $templateScript
      * @return void
      */
     protected function setupScriptForDefaultView($templateScript)
@@ -523,8 +513,7 @@ EOT;
     /**
      * Setup tab template script.
      *
-     * @param string $templateScript
-     *
+     * @param  string  $templateScript
      * @return void
      */
     protected function setupScriptForTabView($templateScript)
@@ -578,8 +567,7 @@ EOT;
     /**
      * Setup default template script.
      *
-     * @param string $templateScript
-     *
+     * @param  string  $templateScript
      * @return void
      */
     protected function setupScriptForTableView($templateScript)
@@ -652,7 +640,7 @@ EOT;
     /**
      * Set Tab Header Label
      *
-     * @param string $label
+     * @param  string  $label
      */
     public function tabHeaderLabel($label)
     {
@@ -664,9 +652,9 @@ EOT;
     /**
      * Render the `HasMany` field.
      *
-     * @throws \Exception
-     *
      * @return \Illuminate\View\View
+     *
+     * @throws \Exception
      */
     public function render()
     {
@@ -681,26 +669,26 @@ EOT;
         // specify a view to render.
         $this->view = $this->views[$this->viewMode];
 
-        list($template, $script) = $this->buildNestedForm($this->column, $this->builder)
+        [$template, $script] = $this->buildNestedForm($this->column, $this->builder)
             ->getTemplateHtmlAndScript();
 
         $this->setupScript($script);
 
         return parent::fieldRender([
-            'forms'        => $this->buildRelatedForms(),
-            'template'     => $template,
+            'forms' => $this->buildRelatedForms(),
+            'template' => $template,
             'relationName' => $this->relationName,
-            'options'      => $this->options,
-            'tabHeaderLabel' => $this->tabHeaderLabel
+            'options' => $this->options,
+            'tabHeaderLabel' => $this->tabHeaderLabel,
         ]);
     }
 
     /**
      * Render the `HasMany` field for table style.
      *
-     * @throws \Exception
-     *
      * @return mixed
+     *
+     * @throws \Exception
      */
     protected function renderTable()
     {
@@ -737,7 +725,7 @@ EOT;
         }, '');
 
         /* Build cell with hidden elements */
-        $template .= '<td class="hidden">' . implode('', $hidden) . '</td>';
+        $template .= '<td class="hidden">'.implode('', $hidden).'</td>';
 
         $this->setupScript(implode("\r\n", $scripts));
 
@@ -745,11 +733,11 @@ EOT;
         $this->view = $this->views[$this->viewMode];
 
         return parent::fieldRender([
-            'headers'      => $headers,
-            'forms'        => $this->buildRelatedForms(),
-            'template'     => $template,
+            'headers' => $headers,
+            'forms' => $this->buildRelatedForms(),
+            'template' => $template,
             'relationName' => $this->relationName,
-            'options'      => $this->options,
+            'options' => $this->options,
         ]);
     }
 }

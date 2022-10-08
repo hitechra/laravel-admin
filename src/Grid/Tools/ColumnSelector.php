@@ -21,7 +21,7 @@ class ColumnSelector extends AbstractTool
     /**
      * Create a new Export button instance.
      *
-     * @param Grid $grid
+     * @param  Grid  $grid
      */
     public function __construct(Grid $grid)
     {
@@ -43,7 +43,7 @@ class ColumnSelector extends AbstractTool
     /**
      * Ignore a column to display in column selector.
      *
-     * @param string|array $name
+     * @param  string|array  $name
      */
     public static function ignore($name)
     {
@@ -62,8 +62,8 @@ class ColumnSelector extends AbstractTool
         }
 
         return Admin::component('admin::components.grid-column-selector', [
-            'columns'  => $this->getGridColumns(),
-            'visible'  => $this->grid->visibleColumnNames(),
+            'columns' => $this->getGridColumns(),
+            'visible' => $this->grid->visibleColumnNames(),
             'defaults' => $this->grid->getDefaultVisibleColumnNames(),
         ]);
     }

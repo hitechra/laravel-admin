@@ -28,11 +28,10 @@ class Selector implements Renderable
     }
 
     /**
-     * @param string         $column
-     * @param string|array   $label
-     * @param array|\Closure $options
-     * @param null|\Closure  $query
-     *
+     * @param  string  $column
+     * @param  string|array  $label
+     * @param  array|\Closure  $options
+     * @param  null|\Closure  $query
      * @return $this
      */
     public function select($column, $label, $options = [], $query = null)
@@ -41,11 +40,10 @@ class Selector implements Renderable
     }
 
     /**
-     * @param string        $column
-     * @param string        $label
-     * @param array         $options
-     * @param null|\Closure $query
-     *
+     * @param  string  $column
+     * @param  string  $label
+     * @param  array  $options
+     * @param  null|\Closure  $query
      * @return $this
      */
     public function selectOne($column, $label, $options = [], $query = null)
@@ -54,12 +52,11 @@ class Selector implements Renderable
     }
 
     /**
-     * @param string $column
-     * @param string $label
-     * @param array  $options
-     * @param null   $query
-     * @param string $type
-     *
+     * @param  string  $column
+     * @param  string  $label
+     * @param  array  $options
+     * @param  null  $query
+     * @param  string  $type
      * @return $this
      */
     protected function addSelector($column, $label, $options = [], $query = null, $type = 'many')
@@ -115,10 +112,9 @@ class Selector implements Renderable
     }
 
     /**
-     * @param string $column
-     * @param mixed  $value
-     * @param bool   $add
-     *
+     * @param  string  $column
+     * @param  mixed  $value
+     * @param  bool  $add
      * @return string
      */
     public static function url($column, $value = null, $add = false)
@@ -160,7 +156,7 @@ class Selector implements Renderable
     {
         return view('admin::grid.selector', [
             'selectors' => $this->selectors,
-            'selected'  => static::parseSelected(),
+            'selected' => static::parseSelected(),
         ]);
     }
 }

@@ -29,7 +29,7 @@ class Select extends Presenter
     /**
      * Select constructor.
      *
-     * @param mixed $options
+     * @param  mixed  $options
      */
     public function __construct($options)
     {
@@ -41,9 +41,8 @@ class Select extends Presenter
      *
      * all configurations see https://select2.org/configuration/options-api
      *
-     * @param string $key
-     * @param mixed  $val
-     *
+     * @param  string  $key
+     * @param  mixed  $val
      * @return $this
      */
     public function config($key, $val)
@@ -74,12 +73,12 @@ class Select extends Presenter
 
         if (empty($this->script)) {
             $placeholder = json_encode([
-                'id'   => '',
+                'id' => '',
                 'text' => trans('admin.choose'),
             ]);
 
             $configs = array_merge([
-                'allowClear'         => true,
+                'allowClear' => true,
             ], $this->config);
 
             $configs = json_encode($configs);
@@ -104,10 +103,9 @@ SCRIPT;
     /**
      * Load options from current selected resource(s).
      *
-     * @param string $model
-     * @param string $idField
-     * @param string $textField
-     *
+     * @param  string  $model
+     * @param  string  $idField
+     * @param  string  $textField
      * @return $this
      */
     public function model($model, $idField = 'id', $textField = 'name')
@@ -144,23 +142,22 @@ SCRIPT;
     /**
      * Load options from remote.
      *
-     * @param string $url
-     * @param array  $parameters
-     * @param array  $options
-     *
+     * @param  string  $url
+     * @param  array  $parameters
+     * @param  array  $options
      * @return $this
      */
     protected function loadRemoteOptions($url, $parameters = [], $options = [])
     {
         $ajaxOptions = [
-            'url'  => $url,
+            'url' => $url,
             'data' => $parameters,
         ];
         $configs = array_merge([
-            'allowClear'         => true,
-            'placeholder'        => [
-                'id'        => '',
-                'text'      => trans('admin.choose'),
+            'allowClear' => true,
+            'placeholder' => [
+                'id' => '',
+                'text' => trans('admin.choose'),
             ],
         ], $this->config);
 
@@ -189,15 +186,15 @@ EOT;
     /**
      * Load options from ajax.
      *
-     * @param string $resourceUrl
+     * @param  string  $resourceUrl
      * @param $idField
      * @param $textField
      */
     public function ajax($resourceUrl, $idField = 'id', $textField = 'text')
     {
         $configs = array_merge([
-            'allowClear'         => true,
-            'placeholder'        => trans('admin.choose'),
+            'allowClear' => true,
+            'placeholder' => trans('admin.choose'),
             'minimumInputLength' => 1,
         ], $this->config);
 
@@ -249,7 +246,7 @@ EOT;
     {
         return [
             'options' => $this->buildOptions(),
-            'class'   => $this->getElementClass(),
+            'class' => $this->getElementClass(),
         ];
     }
 
@@ -264,11 +261,10 @@ EOT;
     /**
      * Load options for other select when change.
      *
-     * @param string $target
-     * @param string $resourceUrl
-     * @param string $idField
-     * @param string $textField
-     *
+     * @param  string  $target
+     * @param  string  $resourceUrl
+     * @param  string  $idField
+     * @param  string  $textField
      * @return $this
      */
     public function load($target, $resourceUrl, $idField = 'id', $textField = 'text'): self
@@ -301,8 +297,7 @@ EOT;
     /**
      * Get form element class.
      *
-     * @param string $target
-     *
+     * @param  string  $target
      * @return mixed
      */
     protected function getClass($target): string
